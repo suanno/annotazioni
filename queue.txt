@@ -1,9 +1,9 @@
-- Probabilità condizionata descrive la statistica SOLO dei dati con t>t0. Rinormalizzo istogramma ecc.
-- Decay law da principi primi deboli
 - Teorema ergodico per le medie.
 * Cosa posso dire in più sui valori istantanei, ovvero perché ha senso pensare x(t) come la n-esima estrazione di un processo aleatorio? Discutere Ignoranza.
 - Perché ha senso calcolare le medie statistiche (sugli einsemble) dal Teorema ergodico.
 - Coni di dirac, legge di dispersione particelle massless, klein tunneling
 - Regola d'oro punto della situazione
 - Solitario, concetto di mazzo random
-- Misure poco e molto frequenti dello spin di una particella in un campo magnetico. La statistica non cambia..
+- Misure poco e molto frequenti dello spin di una particella in un campo magnetico. La statistica non cambia
+- BCS acctractive interaction
+- Average number of (any) photons
