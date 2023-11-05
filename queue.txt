@@ -6,4 +6,4 @@
 - Coni di dirac, legge di dispersione particelle massless, klein tunneling
 - Regola d'oro punto della situazione
 - Solitario, concetto di mazzo random
-- Misure poco e molto frequenti dello spin di una particella in un campo magnetico. La statistica non cambia.
+- Misure poco e molto frequenti dello spin di una particella in un campo magnetico. La statistica non cambia..

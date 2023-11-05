@@ -1,0 +1,11 @@
+        clock_t t; 
+        t = clock();
+
+
+        
+        // Propagation time
+        t = clock() - t;
+        double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+
+
+99991
