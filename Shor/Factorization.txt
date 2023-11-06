@@ -1,3 +1,0 @@
-Consideriamo le funzioni del tipo x -> a^x mod n (a,n con a < n definiscono la funzione).
-Possiamo calcolarne il periodo (minimo) r, ovvero tale che a^r = 1 mod n con Shor.
-Da questo fatto riusciamo a fattorizzare un numero n=p*q.
