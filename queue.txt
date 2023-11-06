@@ -1,4 +1,3 @@
-+ Shor factorization: Implementazione codice (calcolando r classicamente, senza Shor)
 + Misure poco e molto frequenti dello spin di una particella in un campo magnetico. La statistica non cambia
 + Average number of (any) photons
 + Solitario, concetto di mazzo random
