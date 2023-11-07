@@ -1,0 +1,1 @@
+Vogliamo verificare il teorema centrale del limite quando le r.v. di cui vado a fare la media non sono identicamente distribuite.
