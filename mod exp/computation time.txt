@@ -3,7 +3,7 @@ Tuttavia agli informatici piace chiamare n il numero di bit che servono per rapp
 la complessità come una funzione di n e non di x!
 Quindi ciò che è lineare in x è esponenziale in n!
 
-L'algoritmo naive è O(x) = O(2^n), mentre quello di IASTRA ha un ciclo da n iterate anziché x, quindi è O(n).
+L'algoritmo naive è O(x) = O(2^n), mentre quello di SQUARE AND MULTIPLY ha un ciclo da n iterate anziché x, quindi è O(n).
 
 E' semplicemente una convenzione quella di esprimere il costo in termini di n, anziché x, dove n è il numero (minimo) di bit che servono per rappresentare n, ovvero n è circa log2(n).
 
