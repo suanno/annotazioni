@@ -10,26 +10,36 @@ int gcd(int a, int b);
 int main(int argc, char** argv) {
     /* Factorizes N = pq with (classic)Shor */
     int a, q, p;
-    //a = strtol(argv[1], NULL, 10);
-    //q = strtol(argv[2], NULL, 10);
-    //p = strtol(argv[3], NULL, 10);
-    //int N = p*q;
     int N = strtol(argv[1], NULL, 10);
-    a = 1;
 
     int r, c;
-    c = 0;
-    while (c == 0 && a < N+1){ //Check if a is good UNTIL a < N+1 because on Z_N N+1 and 1 are the same
-        // Calculate r
-        a = a + 1;
-        //if (gcd(a+1, N) == 1){  // a must be coprime with N in order to apply Small Fermat Theorem (to say it exist surely a value of r < N)
+    /*  In order to calculate the factors p and q, we need to find an integer a such that:
+        - It exists the order r of a respect to N;
+        - r is good (even and y is not 0 mod N)
+        And THEN we can calculate p and q.
+
+        "c" is the "check variable". It is initialized c = -1 and it becomes
+        - c = -1 if r does not exist for any a
+        - c = 0 if an r exist for at least one a, but there are no a such that exists a good r
+        - c = 1 if it exists an a such that exists an r and r is good
+    */
+
+    c = -1;
+    a = 1;
+    while (c != 1 && a < N){ //Check if a is good UNTIL a < N, because "N = 0 (mod N)"
+        a = a + 1;  // We start from a = 2
+
+        if (N%a != 0){  // Discard a if it divides N. In that case r does not exist!
+            printf("a = %d ", a);
             r = classicShor(a, N);
             c = check(a, N, r);
-            printf("; a = %d r = %d y mod %d = %d; a is not good\n", a, r, N, (modexp(a, r/2, N) + 1)%N);
-        //}
+            printf("r = %d y mod %d = %d; a is not good\n", r, N, (modexp(a, r/2, N) + 1)%N);
+        }
     }
-    if (a < N+1){
-        // Calculate x,y
+
+    // Calculate p and q
+    // If c = 1, it means it exists a good r
+    if (c == 1){
         int x, y;
         x = (modexp(a, r/2, N) - 1)%N;
         y = (modexp(a, r/2, N) + 1)%N;
@@ -42,13 +52,14 @@ int main(int argc, char** argv) {
 }
 
 int classicShor(int a, int N){
-    /*  Finds the SMALLEST r such that a^r = 1 mod N 
-        It always exists
+    /*  Finds the SMALLEST r such that a^r = 1 mod N
+        Looks for r in range 1,2,...,N-1 because it exists in this range or it does not exist at all 
+        If it does not exists, returns -1
     */
     clock_t t; 
     t = clock();
 
-    printf("Testing a = %d.", a);
+    printf("(Classic) Shor a = %d... ", a);
     int r = 1;
     int res = modexp(a,r,N);
     while (res != 1 && r < N){
@@ -59,9 +70,10 @@ int classicShor(int a, int N){
 
     t = clock() - t;
     double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
-    printf("(Classic) Shor computation time: %lf sec\n", time_taken);
-    if (r == N) //In this case that a is not good
-        return 1;
+    printf("Computation time: %lf sec\n", time_taken);
+
+    if (r == N) //In this case that r does not exists
+        return -1;
     else
         return r;
 }
@@ -73,7 +85,7 @@ int check(int a, int N, int r){
     - y = (a^{r/2} + 1) mod N != 0
     */
 
-    if (r%2 != 0)
+    if (r%2 != 0 || r < 0)
         return 0;
     int y = (modexp(a, r/2, N) + 1)%N;
     if (y == 0)
