@@ -1,4 +1,3 @@
-+ Shor implementazione in c (con metodo classico per trovare r)
 + Misure poco e molto frequenti dello spin di una particella in un campo magnetico. La statistica non cambia
 + Average number of (any) photons
 + Zero chemical potential photons and fonons (in general to get BE you need \mu < 0 but why its zero if particle can be created / destroyed?)
