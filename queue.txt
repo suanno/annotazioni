@@ -1,5 +1,4 @@
 + Misure poco e molto frequenti dello spin di una particella in un campo magnetico. La statistica non cambia
-+ Solitario, concetto di mazzo random
 
 - Teorema ergodico per le medie.
 * Cosa posso dire in più sui valori istantanei, ovvero perché ha senso pensare x(t) come la n-esima estrazione di un processo aleatorio? Discutere Ignoranza.
