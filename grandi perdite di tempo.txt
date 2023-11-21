@@ -1,0 +1,6 @@
+Software calendario con eventi con "checkable list"
+Software markdown writing che
+- mette da solo mathmode quando vede \sigma ecc
+- permette di resizare una immagine nella pagina come su paint (pieno controllo formattazioine)
+consorzio della grande pentola
+

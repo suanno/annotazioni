@@ -6,4 +6,5 @@
 - Coni di dirac, legge di dispersione particelle massless, klein tunneling
 - Regola d'oro punto della situazione
 - BCS acctractive interaction
+- Algoritmo di Shor non fattorizza tutti i primi (tipo non fattorizza 4,6,14,...): Limiti algoritmo di Shor (per numeri N=p*q grandi magari)
 
