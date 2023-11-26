@@ -1,3 +1,5 @@
++ (Superconduttori - quantizzazione del flusso) La fase dalla funzione d'onda del condensato non è una funzione! 
+
 + Misure poco e molto frequenti dello spin di una particella in un campo magnetico. La statistica non cambia
 
 - Teorema ergodico per le medie.
