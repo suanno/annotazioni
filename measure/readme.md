@@ -1,10 +1,18 @@
 # Pointer states and basis ambiguity
 
+**Attenzione**: Più che una ignoranza su come scrivere l'operatore che misuro, ho ignoranza su quale operatore misuro. Ci sono più operatori con autostati tali che il sistema iniziale è in uno stato entangled e quindi che posso misurare per ottenere info sul sistema. Il problema però è che non so quale sto misurando. Ed in base a quale **scelgo inconsapevolmente** di misurare ho una associazione misura->stato del sys.
+
+Nella descrizione alternativa (teoria di decoerenza), invece non c'è da fare questa scelta.
+
 # Two descriptions (collapse OR decoherence)
 
 Decoherence theory do not explain the collapse on eigenstates of an operator (that we call the 'Measured' operator, even if we do not know how to write it).
 
 Instead the theory shows that the density matrix ends up diagonal in a basis, called _pointer basis_ (that is unique because, salvo recombination of degenerate states of the System + Apparatus system, a matrix is diagonal only in the unique eigenstates basis).
+
+The states of this basis are all **separable** and each state of the enviroment is **bijectively related** to a state of the system.
+Often, only the Apparatus basis is called "Pointer basis".
+Thanks to this _separableness_ you can get information on the state of the System.
 
 So the state, at the end of the interaction processes, **is a PURELY CLASSICAL SUPERPOSITION** (that, if you think to it, is equivalent to say that it is a Pure state) **of the Pointer states**.
 So the system **IS IN ONE** of the Pointer states and there is no need of postulating a collapse.
@@ -16,6 +24,9 @@ So, after the interactions, the system **IS** in an eigenstate of $P_A$.
 And so, this Operator $P_A$ can be recognized as the **measured operator** in the _collapse description_.
 
 **Notice that**: In Decoherence theory **there isn't** the concept of **measuring an operator**.
+
+#### [Zuker] In what mixture the wave packet collapses?
+The decoherence theory states that the (classical) mixture into which the wavefunction collapses is a (classical) mix of Pointer basis' states.
 
 # (Apparatus) Basis Ambiguity
 In the _collapse description_, when you perform a measure, you are _measuring an Operator_ acting on the Hilbert space of the apparatus.
