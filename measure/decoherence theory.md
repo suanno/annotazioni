@@ -21,7 +21,8 @@ where $\{\ket{s'_n}\}$ is an orthonormal basis of $H_S$ in principle _different 
 When we introduced the states $\{\ket{s_n}\}$ and the coefficients $c_n$, we did not require anything on this basis or this coefficients.
 So we can choose to represent the initial state of the system in the basis $\{\ket{s'_n}\}$; so we choose $\ket{s_n} = \ket{s'_n}\forall n$.
 
-Then, for reasons unclear to me, the coefficients of the Shmidt decomposition $\alpha_n = c_n$ and so the _system-apparatus_ interaction **evolves the universe state** as
+<font color="red">Then, for reasons unclear to me, the coefficients of the Shmidt decomposition $\alpha_n = c_n$ and so the _system-apparatus_ interaction **evolves the universe state** as</font>
+
 $$\sum_n c_n\ket{s_n}\otimes\ket{A_0}\otimes\ket{\Epsilon_0} \rightarrow \sum_n c_n(\ket{s_n}\otimes\ket{a_n})\otimes\ket{\Epsilon_0}$$
 
 So the system-apparatus interaction establishes a **correlation** between the system and the apparatus.
@@ -63,7 +64,7 @@ The uniqueness of this decomposition, and the fact that it is unique even withou
 
 **The (unique)** apparatus basis that appears in the universe state decomposition is called **the pointer basis** (because, as we said before, the apparatus states **that show up in the decomposition** describe the position of the pointer in the analogic display of the machine).
 Notice that, due to the decomposition, not only there is no choice for the apparatus basis, but even for the system basis (and even the enviroment states $\{\epsilon_n\}$), so there is no choice of the states $\ket{s_n}\otimes \ket{a_n}$ showing up in the decomposition.  
-Notice even that, if the pointer basis is unuque, it means that the states you can find the apparatus after a measurement (the possible positions of the pointer on the display) are finite. That's coherent with our experience.
+<font color=#0fb503>Notice even that, if the pointer basis is unuque, it means that the states you can find the apparatus after a measurement (the possible positions of the pointer on the display) are finite (and they are the pointer states). That's coherent with our experience.</font>
 
 **But why** the universe state shall **evolve in such a way?**. Or equivalently, why it must preserve **the same** correlation between the system and the apparatus it had before interacting with the enviroment?
 [Notice that a correlation between the apparatus and the enviroment must be established, if you do an analogy with what happens when the system-apparatus interaction took place. You can only discuss about wether the previous correlation between system and apparatus remains (and if it remains the same)]
@@ -72,14 +73,15 @@ This is due to the everyday experience, that shows us that the machines we use t
 
 So the enviroment interaction (that is **the key of decoherence theory**) **removes** the apparatus **basis ambiguity**. But the strenght of decoherence theory is not the absence of this ambiguity, but the **operative description of measurement** it gives you. In this operative description, the pointer basis plays an important role.
 
-#### Conceptual consideration on Pointer states
+#### Conceptual consideration on Pointer states (why we make all those consideration, instead of directly talk about density matrices?)
 I want to **enhance** that we found out the extistance of a _preferred basis_ (the pointer basis) **without** talking about the density matrix, but from _everyday experience considerations_.
-Thinking to everyday experience, we concluded that the pointer states (a _finite_ set of states) are the ones in which you find the apparatus _after_ a measurement took place (this is clear if you think to a wave function collapse following the measurement).
+Thinking to everyday experience, we concluded that the pointer states (a _finite_ set of states) are the ones in which you find the apparatus _after_ a measurement took place (this is clear if you think to a wave function collapse following the measurement) and by recognizing the apparatus in one of those states, you get the result of a measurement on the system.
 
 **In a while** we will see that this preferred basis plays an interesting role when you consider how the reduced density matrix of the system+apparatus subsystem evolves during the interaction with the enviroment.
-But it is important to enhance that the we consider this basis as special **not for** of the shape the reduced density matrix shows when represented in this basis!
-It is special, because you'll find the apparatus in
-
+<font color="green">
+You can even say that the pointer basis is special for the above reason (related to density matrix) and you can explain all quantum measurement properties just dealing with the density matrix and **without making all the considerations made up until here***.
+But the discussion would be **very innatural**.
+</font>
 
 ### Decoherence in the reduced density matrix (Partial solution to the measure problem / Operative description of measure)
 The universe state, after both interactions took place, is
@@ -91,8 +93,9 @@ Let's trace out the enviroment degrees of freedom and so consider the reduced de
 $$\rho_{S+A} = \sum_k \bra{\epsilon_k}(\sum_{n,m}c_nc^*_m \ket{s_na_n\epsilon_n}\bra{s_ma_m\epsilon_m})\ket{\epsilon_k} = $$
 $$= \sum_{n,m}c_nc^*_m\ket{s_na_n}\bra{s_ma_m}\sum_k\braket{\epsilon_k|\epsilon_n}\braket{\epsilon_m|\epsilon_k}$$
 
-When we talked about the uniqueness of the _tridecomposition_, we enhanced that the states $\{\epsilon_n\}$ are not necessarly orthogonal. Indeed, _through some examples_, it can be shown that the enviroment states **that show up in the tridecomposition** (the decomposition is unique and so this set of states is unique) **become soon orthogonal** after the interaction with the enviroment begins.
+When we talked about the uniqueness of the _tridecomposition_, we enhanced that the states $\{\epsilon_n\}$ are not necessarly orthogonal. Indeed, _through some examples_, <font color="red">it can be shown that the enviroment states **that show up in the tridecomposition** (the decomposition is unique and so this set of states is unique) **become soon orthogonal** after the interaction with the enviroment begins.
 In particular, their scalar product $\braket{\epsilon_n|\epsilon_k}\rightarrow \delta_{n,k}$ _exponentially_, in a time scale that is **much smaller** than the time scale your machines work.
+</font>
 
 So, short after the interaction with the enviroment begins, the reduced density matrix becomes, very fast, **but continuosly** **(quasi)diagonal** in the basis $\{s_n\}\otimes \{a_n\}$, so **in the pointer basis**.
 [We have always called "ponter basis" $\{a_n\}$, that is unique because the tridecomposition is so. But even the system basis $\{s_n\}$ is unique, because we cannot change the system's basis while preserving a correlation between system-apparatus AND apparatus-enviroment, due to the tridecomposition uniqueness.
@@ -103,14 +106,14 @@ The reduced density matrix is (quasi)diagonal in the pointer states basis $\{s_n
 
 This does not mean that the system+apparatus, after the interaction with the enviroment took place **is** in a state that is a purely classical mixture! Indeed, as the **reduced density matrix contains all the information you can extract** from the system+apparatus through experiments on the system+apparatus, this means that
 
---
+---
 
 When you perform an experiment (measure) on the system+apparatus, it **will react as if it were** in a purely classical mixture of states. The states of the mixture are the **pointer states** $\{\ket{s_n}\otimes\ket{a_n}\}$ and the associated classical(einsemble) probabilities are $|c_n|^2$.
 
 
 So, in order **to explain the results** of a measurement experiment, you can deal with this **equivalent classiscal system**, because the information you can extract from your quantum system through experiments, is the same you can extract from the equivalent classical system.
 
---
+---
 
 #### Properties of quantum measurement explained (What decoherence theory manages to explain without postulating a wave function collapse)
 - In the classical system (think it as a macroscopic system) you'll **find** the system **in one state** of the mixture with its einsemble probability, that is $|c_n|^2$ for the (pointer)state $\ket{s_n}\otimes\ket{a_n}$. This explains the _Bohrn rule_.
@@ -122,4 +125,4 @@ With the above two considerations, _all_ the properties of the results of quantu
 For this reason, you can read in the articles that "decoherence theory gives only a **partial solution** to the measure problem".
 
 #### Determination of the pointer basis (even called _Stability criterion_)
-There is an argument telling that you can find the _pointer basis_ as the eigenstates basis of an operator, acting on $H_A$, that commutes with the apparatus-enviroment interaction. So the interaction with the enviroment determines the pointer basis (this concept is called **enviroment-induced superselection**). 
+<font color="red">There is an argument telling that you can find the _pointer basis_ as the eigenstates basis of an operator, acting on $H_A$, that commutes with the apparatus-enviroment interaction. So the interaction with the enviroment determines the pointer basis (this concept is called **enviroment-induced superselection**).</font>
