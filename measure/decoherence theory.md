@@ -9,13 +9,13 @@ The **measure procedure** is composed of two steps
 
 ### Premeasure
 The state of the universe is **initially** (before any interaction between the 3 subsystems) is **separable**.
-$$\ket{\Psi(0)} = \sum_n c_n\ket{s_n}\otimes\ket{A_0}\otimes\ket{\Epsilon_0}$$
-where $\{\ket{s_n}\}$ is an orthonormal basis of $H_S$ and $\ket{A_0}, \ket{\Epsilon_0}$ are the initial states of the apparatus (A) and the enviroment ($\epsilon$).
+$$\ket{\Psi(0)} = \sum_n c_n\ket{s_n}\otimes\ket{A_0}\otimes\ket{E_0}$$
+where $\{\ket{s_n}\}$ is an orthonormal basis of $H_S$ and $\ket{A_0}, \ket{E_0}$ are the initial states of the apparatus (A) and the enviroment ($\epsilon$).
 
 When the interaction between the system and the apparatus took place, if you consider it to be **strong and localized in time**, you can neglect the interaction between (S+A) and the enviroment ($\epsilon$).
 
 Due to Shmidt decomposition theorem, and considering no interaction with the enviroment (and no evolution of the enviroment) in the _small time interval_ when the system-apparatus interaction takes place; we can **uniquely decompose**
-$$\ket{\Psi(t)} = \sum_n \alpha_n(\ket{s'_n}\otimes\ket{a_n})\otimes\ket{\Epsilon_0}$$
+$$\ket{\Psi(t)} = \sum_n \alpha_n(\ket{s'_n}\otimes\ket{a_n})\otimes\ket{E_0}$$
 where $\{\ket{s'_n}\}$ is an orthonormal basis of $H_S$ in principle _different from_ $\{\ket{s_n}\}$ and $\{\ket{a_n}\}$ is an orthonormal basis (or at least an orthonormal set) of $H_A$. Notice that the sum is over only one index $n$, this is due to the application of the Shmidt theorem.
 
 When we introduced the states $\{\ket{s_n}\}$ and the coefficients $c_n$, we did not require anything on this basis or this coefficients.
@@ -23,12 +23,12 @@ So we can choose to represent the initial state of the system in the basis $\{\k
 
 <font color="red">Then, for reasons unclear to me, the coefficients of the Shmidt decomposition $\alpha_n = c_n$ and so the _system-apparatus_ interaction **evolves the universe state** as</font>
 
-$$\sum_n c_n\ket{s_n}\otimes\ket{A_0}\otimes\ket{\Epsilon_0} \rightarrow \sum_n c_n(\ket{s_n}\otimes\ket{a_n})\otimes\ket{\Epsilon_0}$$
+$$\sum_n c_n\ket{s_n}\otimes\ket{A_0}\otimes\ket{E_0} \rightarrow \sum_n c_n(\ket{s_n}\otimes\ket{a_n})\otimes\ket{E_0}$$
 
 So the system-apparatus interaction establishes a **correlation** between the system and the apparatus.
 
 In order to appreciate this correlation, you have to consider the **collapse of the wave function postulate** when you perform a quantum measure.
-If you then measure the operator $\hat{O}_S$, acting on space $H_S$ and with eigenvectors $\{\ket{s_n}\}$, then the _universe state_ will collapse into a state of the kind $\ket{s_n}\otimes\ket{a_n}\otimes\ket{\Epsilon_0}$. So the state in which the apparatus is after the measure, **contains a record** of the result of the measurement performed on the system.
+If you then measure the operator $\hat{O}_S$, acting on space $H_S$ and with eigenvectors $\{\ket{s_n}\}$, then the _universe state_ will collapse into a state of the kind $\ket{s_n}\otimes\ket{a_n}\otimes\ket{E_0}$. So the state in which the apparatus is after the measure, **contains a record** of the result of the measurement performed on the system.
 
 The idea is that _practically_, when you perform a measurment _on the system_, you let the system _pass through_ an apparatus and then you read the position of the _pointer_ on the analogic interface of the apparatus.
 So you _find out_ the result of the measure, by looking at the _state of the apparatus_, which contains a record of the result of the measure.
@@ -45,7 +45,7 @@ So we can state that, if we describe a measure postulating the wave function col
 So this is an **advantage** decoherence theory shows over the _wave function collapse description_.
 
 You can show (throught some examples) that, if you change the system basis $\{\ket{s_n}\}\rightarrow \{\ket{s''_k}\}$, it is possible to _mantain a correlation_ between the system and the apparatus, by changing the apparatus basis $\{\ket{a_n}\}\rightarrow \{\ket{a''_k}\}$ (where $\ket{a''_k} = \sum_n\bra{a_n}\ket{a''_k}\ket{a_n}$). Explicitly, you can rewrite the universe state as
-$$\sum_n c_n(\ket{s_n}\otimes\ket{a_n})\otimes\ket{\Epsilon_0} = \sum_n c_n(\ket{s''_n}\otimes\ket{a''_n})\otimes\ket{\Epsilon_0}$$
+$$\sum_n c_n(\ket{s_n}\otimes\ket{a_n})\otimes\ket{E_0} = \sum_n c_n(\ket{s''_n}\otimes\ket{a''_n})\otimes\ket{E_0}$$
 so if you measure on the system an operator $\hat{O'}_S$, whose eigenstates are $\{\ket{s'_k}\}$, then the universe state will _collapse_ into a state of the kind $\ket{s''_k}\otimes\ \ket{a''_k}$, enabling you to find out the result of a measurement of $\hat{O'}_S$, by looking at the apparatus state.
 But the everyday _experience_ tells us that the same apparatus cannot be used to measure different observables $\hat{O}$ and $\hat{O'}$. For example, a machine that is built to measure the position of a particle, is not able to measure even its momentum (even in two different experiment, not "simultaneously").
 
@@ -56,7 +56,7 @@ The premeasurement step is accounted in decoherence theory, but is a very genera
 The articles often refer to the premeasurement step as the **von Neumann interpretation** of measure.
 
 If we activate the apparatus-enviroment interaction _after_ the system-apparatus interaction (so now the second is no more present), then the system+apparatus becomes correlated with the enviroment (with this sentence, we are doing an **analogy** with what happens when the system-apparatus interaction), so
-$$\sum_n c_n(\ket{s_n}\otimes\ket{a_n})\otimes\ket{\Epsilon_0} \rightarrow \sum_n c_n\ket{s_n}\otimes\ket{a_n}\otimes\ket{\epsilon_n}$$
+$$\sum_n c_n(\ket{s_n}\otimes\ket{a_n})\otimes\ket{E_0} \rightarrow \sum_n c_n\ket{s_n}\otimes\ket{a_n}\otimes\ket{\epsilon_n}$$
 where $\{\ket{\epsilon_n}\}$ is a set of states in $H_{\epsilon}$, not even necessarly linear independet.
 
 Now that the subsystems are 3, we cannot apply the Shmidt decomposition theorem (in some articles called **tridecompositional uniqueness theorem**), but there is a theorem that grants that if a decomposition exists, then it is unique.
@@ -121,7 +121,7 @@ So, in order **to explain the results** of a measurement experiment, you can dea
 - Then, in a classical system (still think it as a _macroscopic object_), if you find the system in a state, and then you look at the state of the system immediately after, you'll find the system in the same state, so you'll get the same measurement result (think to the position of a grain of sand).
 Appreciate that, in order to explain this second property of quantum measurement, you tipically postulate a _wave function collapse_ following a measurement, but here **you never account this postulate!**
 
-With the above two considerations, _all_ the properties of the results of quantum experiments have been explained, without recurring. But this is just an **Operative description** of quantum measurement, because we did not say anything about "what happens to the universe wave function **when you realize** the system+apparatus **in one pointer state**?". We simply managed to describe the properties of results of quantum measurements **without the need** of thinking to the universe state (we talked of density matricesm, but the density matrix contains less information than the state!).
+With the above two considerations, _all_ the properties of the results of quantum experiments have been explained, without recurring to the wavefunction collapse postulate. But this is just an **Operative description** of quantum measurement, because we did not say anything about "what happens to the universe wave function **when you realize** the system+apparatus **in one pointer state**?". We simply managed to describe the properties of results of quantum measurements **without the need** of thinking to the universe state (we talked of density matricesm, but the density matrix contains less information than the state!).
 For this reason, you can read in the articles that "decoherence theory gives only a **partial solution** to the measure problem".
 
 #### Determination of the pointer basis (even called _Stability criterion_)
