@@ -90,7 +90,9 @@ and is the result of a **unitary** (and so _continuos in time_) **evolution** of
 $$\rho = \sum_{n,m}c_nc^*_m \ket{s_na_n\epsilon_n}\bra{s_ma_m\epsilon_m}$$
 
 Let's trace out the enviroment degrees of freedom and so consider the reduced density matrix of the system+apparatus (S+A)
+
 $$\rho_{S+A} = \sum_k \bra{\epsilon_k}(\sum_{n,m}c_nc^*_m \ket{s_na_n\epsilon_n}\bra{s_ma_m\epsilon_m})\ket{\epsilon_k} = $$
+
 $$= \sum_{n,m}c_nc^*_m\ket{s_na_n}\bra{s_ma_m}\sum_k\braket{\epsilon_k|\epsilon_n}\braket{\epsilon_m|\epsilon_k}$$
 
 When we talked about the uniqueness of the _tridecomposition_, we enhanced that the states $\{\epsilon_n\}$ are not necessarly orthogonal. Indeed, _through some examples_, <font color="red">it can be shown that the enviroment states **that show up in the tridecomposition** (the decomposition is unique and so this set of states is unique) **become soon orthogonal** after the interaction with the enviroment begins.
