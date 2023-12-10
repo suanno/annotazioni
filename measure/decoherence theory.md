@@ -128,3 +128,4 @@ For this reason, you can read in the articles that "decoherence theory gives onl
 
 #### Determination of the pointer basis (even called _Stability criterion_)
 <font color="red">There is an argument telling that you can find the _pointer basis_ as the eigenstates basis of an operator, acting on $H_A$, that commutes with the apparatus-enviroment interaction. So the interaction with the enviroment determines the pointer basis (this concept is called **enviroment-induced superselection**).</font>
+This enables you to answer the question "what **operator** does the apparatus measure?", because it tells you what quantum operator you measure depending on the form of the interaction with the enviroment.
