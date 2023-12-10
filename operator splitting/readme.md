@@ -78,4 +78,35 @@ In order to get $\Psi'(x,t) = e^{i\frac{d^2}{dx^2}}\Psi(x,t)$, we simply calcula
 $$\Psi'(x,t) = \mathcal{F^{-1}}(\mathcal{F}(e^{i\frac{d^2}{dx^2}}\Psi(x,t))) = \mathcal{F^{-1}}(e^{-i\tau q^2}\mathcal{F}(\Psi(x,t)))$$
 Pay attention to the fact that, after calculating the Fourier transform of $\Psi(x,t)$, you get a function of $q, t$.
 
-# To solve: Boundary condition problem
+## Discretization Problel
+Multiplying by $e^{-i\tau q^2}$ the fourier transform of $\Psi(x,t)$ is _not simple_, as $x$ and $q$ are discrete and not continuos variables.
+In addition, the Fourier transform $\mathcal{F}$ becomes the DFT.
+
+The real and the reciprocal space are points of a lattice and those two **lattices are related** (as we will find out). So we can define the real lattice and then calculate the reciprocal one from the relation that binds the two lattices. In short, we cannot define as we want both lattice, because they are related in a way that we'll discover soon.
+
+It's natural to discretize the real space as
+$$x\rightarrow x_n = na\quad n\in\{0,1,...,N-1\}$$
+where $a$ is the lattice spacing and $N$ is the number of lattice sites.
+
+Now consider what is the **analogous property** of 
+$$\mathcal{F}(\frac{d}{dx}\Psi(x,t)) = (iq)\mathcal{F}(\Psi(x,t))$$
+when you deal with DFT instead of Fourier transform.
+
+$$x = an \implies \frac{d\Psi(x)}{dx}=\frac{dn}{dx}\frac{d\Psi(x)}{dn} = \frac{1}{a}\frac{d\Psi(x)}{dn}$$
+Now, as $x \rightarrow an$, we have that $\Psi(x)\rightarrow\Psi_n = \Psi(x_n)$ and we can express the **array** $\Psi_n$ as its inverse DFT
+$$\sum_{k=0}^{N-1}\hat{\Psi}_ke^{i\frac{2\pi}{N}kn}$$
+so $$\frac{d\Psi(x)}{dx} = \frac{1}{a}\sum_{k=0}^{N-1}(i\frac{2\pi}{N}k)\hat{\Psi}_ke^{i\frac{2\pi}{N}kn}$$
+
+We can read this result as "You can make a derivative in real space, by multiplying the _DFT_ by $(i\frac{2\pi}{Na}k)$".
+But we know that in the **analogous property** of the _Fourier transform_ we multiply by (iq) instead.
+
+So, when you discretize reciprocal space, $q$ becomes a discrete variable that can only take the values of a lattice, and
+$$q\rightarrow q_n = \frac{2\pi}{Na}k\quad k\in\{0,1,...,N-1\}$$
+
+Here its clear that the two lattices are related, as you can see by the presence of the real lattice spacing $a$ in the above formula.
+
+Now we know how to multiply the Fourier transform of $\Psi(x,t)$ (that in a discrete world becomes the DFT) times $e^{-i\tau q^2}$, that becomes the **array** $e^{-i\tau q_k^2}$ with $k\in\{0,1,...,N-1\}$.
+
+## Boundary conditions
+In reality, the reciprocal space shape depends on the boundary conditions you choose.
+But, as soon as we make our simulations _far from the boundaries_, we expect boundary condition to not be relevant.
