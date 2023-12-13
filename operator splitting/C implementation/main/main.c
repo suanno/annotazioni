@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <complex.h>
+#include <math.h>
 #include "global.h"
 #include "fft.h"
 #include "mk1grids.h"
@@ -9,41 +10,65 @@
 
 double V(double x, double t, double xi, double xf, double V0);
 double dVdt(double x, double t);
+double calc_norm(int N, double* psi);
 
 int main(int argc, char** argv) {
     /*int N = strtol(argv[1], NULL, 10);  Space lattice size*/
     /*Lattice and time parameters*/
     int N = 2048;
-    int a = 0.001;                          /*Real lattice spacing*/
+    double a = 0.005;                          /*Real lattice spacing*/
     double* xlattice = (double*)malloc(N*sizeof(double));
     double* qlattice = (double*)malloc(N*sizeof(double));
-    double tau = 1e-5;
-    int Nsteps = 100;
-    /*Psi0 parameters*/
-    double k = 1;  /*Momentum*/
-    complex double* psi = malloc(N*sizeof(complex double));
-    complex double* psi_k = malloc(N*sizeof(complex double));
+    double tau = 0.0001;
+    int Nsteps = 5;
     /*Barrier parameters*/
-    double xi,xf,V0;
-    xi = 5;
-    xf = 10;
-    V0 = 10*k*k*M_PI;
+    double xi, xf, deltax, beta, V0;
+    /*Psi0 parameters*/
+    double m, p, E, alpha; /*Mass, momentum, kinetic energy, E/V0*/
+    double xc, sigma, d;
+    complex double* psi = malloc(N*sizeof(complex double));     /*psi(x,t) (state)*/
+    complex double* psi_k = malloc(N*sizeof(complex double));   /*psi FFT*/
+
+    /*Energy scale*/
+    alpha = 0.8;    /* 0 < alpha < 1 for tunneling (E < V0)*/
+    V0 = 1;         /*Just the ratio with E (alpha) is relevant for evolution, at least I hope so*/
+    E = alpha*V0;
+    /*Lenght scale*/
+    xi = 5;     /*Barrier start location*/
+    sigma = 1;  /*Psi0 width*/
+    beta = 2;   /*beta > 1 for barrier less wide than psi0*/
+    deltax = 2*sigma/beta;
+    xf = xi + deltax;
+    d = 1;
+    xc = xi-sigma-d;
+    /*Velocity scale*/
+    m = (2*alpha*V0*200*tau*tau)/(d*d); /*In order to have at least 10 steps before psi 'touches' the barrier*/
+    p = sqrt(2*m*E);
+    
 
 
-    printf("A");
     /*Make lattices*/
-    mk1grids(N, a, xlattice, qlattice); /*FIXARE STO PROBLEMA DEL PASSAGGIO DEL PUNTATOREEE*/
-    print_matrix(N,1,xlattice);
+    mk1grids(N, a, xlattice, qlattice);
 
-    printf("B");
-
+    /*Define psi0*/
+    double x, norm;
+    for (int n = 0; n < N; n++){
+        x = xlattice[n];
+        psi[n] = exp(-(x*x))*cexp(I*p*x);
+    }
+    norm = calc_norm(N, psi);
+    printf("Norm: %lf\n", norm);
+    /*Normalize psi0*/
+    for (int n = 0; n < N; n++)
+        psi[n] = psi[n]/norm;
+    norm = calc_norm(N, psi);
+    printf("Norm: %lf\n", norm);
     /*Evolution*/
     double t;
     complex double* Vterm = (complex double*)malloc(N*sizeof(complex double));
     complex double* Kterm = (complex double*)malloc(N*sizeof(complex double));
 
-    printf("C");
-    double x, q;
+    double q;
     for(int step = 0; step < Nsteps; step++){
         t = step*tau;
         /* Operator splitting */
@@ -52,11 +77,27 @@ int main(int argc, char** argv) {
             x = xlattice[n];
             q = qlattice[n];
             Vterm[n] = -I*(V(x, t, xi, xf, V0)+dVdt(x,t)*tau/2)*tau/2;
-            Kterm[n] = -I*q*q;
+            Kterm[n] = -q*q;
+            psi[n] = cexp(Vterm[n])*psi[n];
         }
-        printf("D");
+        norm = calc_norm(N, psi);
+        printf("Norm: %lf\n", norm);
         psi_k = fft(N, psi);
+        for (int k = 0; k < N; k++){
+            psi_k[k] = Kterm[k]*psi_k[k];
+        }
+        psi = ifft(N, psi);
+        norm = calc_norm(N, psi);
+        printf("Norm: %lf\n", norm);
+        for (int n = 0; n < N; n++){
+            psi[n] = cexp(Vterm[n])*psi[n];
+        }
+        norm = calc_norm(N, psi);
+        printf("Norm: %lf\n", norm);
     }
+    norm = calc_norm(N, psi);
+    printf("Norm: %lf\n", norm);
+
 }
 
 double V(double x, double t, double xi, double xf, double V0){
@@ -73,4 +114,13 @@ double V(double x, double t, double xi, double xf, double V0){
 double dVdt(double x, double t){
     /* Time derivative of Potential barrier is 0 */
     return 0;
+}
+double calc_norm(int N, double* psi){
+    double x, norm;
+    norm = 0;
+    for (int n = 0; n < N; n++){
+        norm = cabs(psi[n])*cabs(psi[n]);
+    }
+    norm = sqrt(norm);
+    return norm;
 }

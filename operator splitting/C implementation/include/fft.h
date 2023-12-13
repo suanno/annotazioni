@@ -8,6 +8,7 @@
 #endif
 
 complex double* fft(int N, complex double*  vector);
+complex double* ifft(int N, complex double* vector_k);
 complex double* dft(int N, complex double*  vector);
 
 #endif

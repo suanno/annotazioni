@@ -7,7 +7,7 @@
 void mk1grids(int N, double a, double* xlattice, double* qlattice){
     /*Defines real and reciprocal lattices*/
     for(int i = 0; i < N; i++){
-        xlattice[i] = i*a;
-        qlattice[i] = 2*M_PI*i/(N*a);
+        xlattice[i] = a*i;
+        qlattice[i] = 2*M_PI*(double)i/(N*a);
     }
 }

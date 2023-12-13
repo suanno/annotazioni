@@ -38,6 +38,40 @@ complex double* fft(int N, complex double* vector){
     }
 }
 
+complex double* ifft(int N, complex double* vector_k){
+    // Calculates the FFT of vector of size N=2^n
+    if (N > 1){
+        //FFT of vector
+        complex double* vector = malloc(N*sizeof(complex double));
+        //Separate even and odd entries
+        complex double* even_k = malloc((N/2)*sizeof(complex double));
+        complex double* odd_k = malloc((N/2)*sizeof(complex double));
+        //Their FFTs
+        complex double* even = malloc((N/2)*sizeof(complex double));
+        complex double* odd = malloc((N/2)*sizeof(complex double));
+        for (int i = 0; i <= N/2-1; i++){    //N is always even because N=2^n
+            even_k[i] = vector_k[2*i];
+            odd_k[i] = vector_k[2*i+1];
+        }
+        //Calculate their IFFTs
+        even = ifft(N/2, even_k);
+        odd = ifft(N/2, odd_k);
+        //Calculate IFFT of vector_k
+        for(int n = 0; n < N; n++){
+            vector[n] = even[n%(N/2)] + cexp(+I*2*M_PI*(double)n/N)*odd[n%(N/2)];
+        }
+
+        /*For unknown reason segments if you call free*/
+        //free(even); free(odd); free(even_k); free(odd_k);
+        return vector;
+    }else{   //If N=1, then the fft of a number is the number itself
+        //complex double* vector_compex = malloc(sizeof(complex double));
+        //vector_compex[0] = vector[0];
+        //return vector_compex;
+        return vector_k;
+    }
+}
+
 complex double* dft(int N, complex double*  vec){
     complex double* vec_k = malloc(N*sizeof(complex double));
     for (int k = 0; k < N; k++){
