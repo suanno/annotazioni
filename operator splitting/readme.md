@@ -58,7 +58,7 @@ $$U(\tau) = 1 -iH(0)\tau + \big(-iH'(0)-H^2(0)\big)\frac{\tau^2}{2} + o(\tau^2)$
 The last two expressions are the same, if you use that $H_0$ has no time dependance, so $H'(0) = V'(0)$.
 
 # Algorithm implementation
-Consider $H = H_0 + V(x,t)$ where $H_0 = -\frac{d^2}{dx^2}$.
+Consider $H = H_0 + V(x,t)$ where $H_0 = -{\frac{1}{2m}}\frac{d^2}{dx^2}$.
 
 So, if we want to evolve the state with the operator-splitting formula, we have to calculate $$e^{-i\tau H_0}\Psi(x,t) = e^{+i\tau\frac{d^2}{dx^2}}\Psi(x,t)$$
 but how we calculate the action of the exponantial of a derivative?
@@ -74,8 +74,8 @@ So, using the _linearity_ of the Fourier transform
 $$\mathcal{F}(e^{i\tau\frac{d^2}{x^2}}\Psi(x,t)) = \sum_n \frac{(i\tau)^n}{n!}(iq)^{2n}\mathcal{F}(\Psi(x,t)) = e^{-i\tau q^2}\mathcal{F}(\Psi(x,t))$$
 So now we need just to make a fourier trasform and a simple multiplication.
 
-In order to get $\Psi'(x,t) = e^{i\frac{d^2}{dx^2}}\Psi(x,t)$, we simply calculate an _inverse Fourier transform_
-$$\Psi'(x,t) = \mathcal{F^{-1}}(\mathcal{F}(e^{i\frac{d^2}{dx^2}}\Psi(x,t))) = \mathcal{F^{-1}}(e^{-i\tau q^2}\mathcal{F}(\Psi(x,t)))$$
+In order to get $\Psi'(x,t) = e^{i\frac{1}{2m}\frac{d^2}{dx^2}}\Psi(x,t)$, we simply calculate an _inverse Fourier transform_
+$$\Psi'(x,t) = \mathcal{F^{-1}}(\mathcal{F}(e^{i\frac{1}{2m}\frac{d^2}{dx^2}}\Psi(x,t))) = \mathcal{F^{-1}}(e^{-i\frac{q^2}{2m}\tau}\mathcal{F}(\Psi(x,t)))$$
 Pay attention to the fact that, after calculating the Fourier transform of $\Psi(x,t)$, you get a function of $q, t$.
 
 ## Discretization Problel

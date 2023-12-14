@@ -16,10 +16,10 @@ int main(int argc, char** argv) {
     /*int N = strtol(argv[1], NULL, 10);  Space lattice size*/
     /*Lattice and time parameters*/
     int N = 2048;
-    double a = 0.005;                          /*Real lattice spacing*/
+    double a = 0.01;                          /*Real lattice spacing*/
     double* xlattice = (double*)malloc(N*sizeof(double));
     double* qlattice = (double*)malloc(N*sizeof(double));
-    double tau = 0.0001;
+    double tau = 0.01;
     int Nsteps = 5;
     /*Barrier parameters*/
     double xi, xf, deltax, beta, V0;
@@ -44,8 +44,6 @@ int main(int argc, char** argv) {
     /*Velocity scale*/
     m = (2*alpha*V0*200*tau*tau)/(d*d); /*In order to have at least 10 steps before psi 'touches' the barrier*/
     p = sqrt(2*m*E);
-    
-
 
     /*Make lattices*/
     mk1grids(N, a, xlattice, qlattice);
@@ -54,7 +52,7 @@ int main(int argc, char** argv) {
     double x, norm;
     for (int n = 0; n < N; n++){
         x = xlattice[n];
-        psi[n] = exp(-(x*x))*cexp(I*p*x);
+        psi[n] = exp(-0.5*((x-xc)/sigma)*((x-xc)/sigma))*cexp(I*p*x);
     }
     norm = calc_norm(N, psi);
     /*Normalize psi0*/
@@ -67,15 +65,14 @@ int main(int argc, char** argv) {
 
     /*Check normalization after (IFFT * FFT)*/
     double q;
-    /*
-    norm = calc_norm(N, psi);
-    printf("Norm prima: %lf\n", norm);
-    psi_k = fft(N, psi);
-    psi = ifft(N, psi_k);
-    norm = calc_norm(N, psi);
-    printf("Norm dopo: %lf\n", norm);
-    */
-
+    double tunneled = 0;    /*Probability of finding the particle AFTER the barrier*/
+    for (int n = 0; n < N; n++){
+        x = xlattice[n];
+        if (x > xf){
+            tunneled = tunneled + cabs(psi[n])*cabs(psi[n]);
+        }
+    }
+    printf("Prob AFTER the barrier: %lf\n", tunneled);
 
     for(int step = 0; step < Nsteps; step++){
         t = step*tau;
@@ -85,27 +82,29 @@ int main(int argc, char** argv) {
             x = xlattice[n];
             q = qlattice[n];
             Vterm[n] = -I*(V(x, t, xi, xf, V0)+dVdt(x,t)*tau/2)*tau/2;
-            Kterm[n] = -q*q;
+            Kterm[n] = -I*((q*q)/(2*m))*tau;
             psi[n] = cexp(Vterm[n])*psi[n];
         }
-        norm = calc_norm(N, psi);
-        printf("Norm: %lf\n", norm);
         psi_k = fft(N, psi);
         for (int k = 0; k < N; k++){
-            psi_k[k] = Kterm[k]*psi_k[k];
+            psi_k[k] = cexp(Kterm[k])*psi_k[k];
         }
         psi = ifft(N, psi_k);
-        norm = calc_norm(N, psi);
-        printf("Norm: %lf\n", norm);
         for (int n = 0; n < N; n++){
             psi[n] = cexp(Vterm[n])*psi[n];
         }
-        norm = calc_norm(N, psi);
-        printf("Norm: %lf\n", norm);
+
+        tunneled = 0;
+        for (int n = 0; n < N; n++){
+            x = xlattice[n];
+            if (x > xf){
+                tunneled = tunneled + cabs(psi[n])*cabs(psi[n]);
+            }
+        }
+        printf("Prob AFTER the barrier: %lf\n", tunneled);
     }
     norm = calc_norm(N, psi);
-    printf("Norm: %lf\n", norm);
-
+    printf("Final norm: %lf\n", norm);
 }
 
 double V(double x, double t, double xi, double xf, double V0){
@@ -114,7 +113,7 @@ double V(double x, double t, double xi, double xf, double V0){
         This statement gives the energy scale of the problem, and you have to took care of it
         for defining the barrier height (must be >> k^2*\pi)
     */
-    if (x < xi || x > xf)
+    if (x > xi && x < xf)
         return V0;
     else
         return 0;
