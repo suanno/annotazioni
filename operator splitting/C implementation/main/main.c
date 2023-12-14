@@ -10,7 +10,7 @@
 
 double V(double x, double t, double xi, double xf, double V0);
 double dVdt(double x, double t);
-double calc_norm(int N, double* psi);
+double calc_norm(int N, complex double* psi);
 
 int main(int argc, char** argv) {
     /*int N = strtol(argv[1], NULL, 10);  Space lattice size*/
@@ -57,18 +57,26 @@ int main(int argc, char** argv) {
         psi[n] = exp(-(x*x))*cexp(I*p*x);
     }
     norm = calc_norm(N, psi);
-    printf("Norm: %lf\n", norm);
     /*Normalize psi0*/
     for (int n = 0; n < N; n++)
         psi[n] = psi[n]/norm;
-    norm = calc_norm(N, psi);
-    printf("Norm: %lf\n", norm);
     /*Evolution*/
     double t;
     complex double* Vterm = (complex double*)malloc(N*sizeof(complex double));
     complex double* Kterm = (complex double*)malloc(N*sizeof(complex double));
 
+    /*Check normalization after (IFFT * FFT)*/
     double q;
+    /*
+    norm = calc_norm(N, psi);
+    printf("Norm prima: %lf\n", norm);
+    psi_k = fft(N, psi);
+    psi = ifft(N, psi_k);
+    norm = calc_norm(N, psi);
+    printf("Norm dopo: %lf\n", norm);
+    */
+
+
     for(int step = 0; step < Nsteps; step++){
         t = step*tau;
         /* Operator splitting */
@@ -86,7 +94,7 @@ int main(int argc, char** argv) {
         for (int k = 0; k < N; k++){
             psi_k[k] = Kterm[k]*psi_k[k];
         }
-        psi = ifft(N, psi);
+        psi = ifft(N, psi_k);
         norm = calc_norm(N, psi);
         printf("Norm: %lf\n", norm);
         for (int n = 0; n < N; n++){
@@ -115,11 +123,11 @@ double dVdt(double x, double t){
     /* Time derivative of Potential barrier is 0 */
     return 0;
 }
-double calc_norm(int N, double* psi){
-    double x, norm;
+double calc_norm(int N, complex double* psi){
+    double norm;
     norm = 0;
     for (int n = 0; n < N; n++){
-        norm = cabs(psi[n])*cabs(psi[n]);
+        norm = norm + cabs(psi[n])*cabs(psi[n]);
     }
     norm = sqrt(norm);
     return norm;

@@ -31,8 +31,12 @@ int main(int argc, char** argv) {
 
     tempo = clock();
     psi_k = fft(N, psi);
+    psi = ifft(N, psi_k);
     tempo_sec = (double)(clock()-tempo)/CLOCKS_PER_SEC;
     
+    for(int i = 0; i < N; i++){
+        printf("%lf +i%lf\n", creal(psi[i]), cimag(psi[i]));
+    }
     /*
     psi_k_ = dft(N,psi);
 

@@ -58,7 +58,7 @@ complex double* ifft(int N, complex double* vector_k){
         odd = ifft(N/2, odd_k);
         //Calculate IFFT of vector_k
         for(int n = 0; n < N; n++){
-            vector[n] = even[n%(N/2)] + cexp(+I*2*M_PI*(double)n/N)*odd[n%(N/2)];
+            vector[n] = 0.5*(even[n%(N/2)] + cexp(+I*2*M_PI*(double)n/N)*odd[n%(N/2)]);
         }
 
         /*For unknown reason segments if you call free*/

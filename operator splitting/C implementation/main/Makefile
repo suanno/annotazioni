@@ -19,7 +19,7 @@ all: rmxeq mkdep mkxeq
 
 # main programs and required modules 
 
-MAIN = main #metti programmi da compilare (in main)
+MAIN = main test #metti programmi da compilare (in main)
 
 MODULES = fft read_matrix mk1grids
 
