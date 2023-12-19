@@ -4,9 +4,32 @@
 #include <stdio.h>
 #include "global.h"
 
+complex double* dft(int N, complex double*  vec){
+    complex double* vec_k = malloc(N*sizeof(complex double));
+    for (int k = 0; k < N; k++){
+        for (int n = 0; n < N; n++){
+            //printf("n,k,vec[n]: %d, %d, %lf +j%lf\n",n,k,creal(vec[n]),cimag(vec[n]));
+            vec_k[k] = vec_k[k] + vec[n]*cexp(-I*2*M_PI*(double)k*n/N);
+        }
+    }
+    return vec_k;
+}
+
+complex double* idft(int N, complex double*  vec){
+    complex double* vec_k = malloc(N*sizeof(complex double));
+    for (int k = 0; k < N; k++){
+        for (int n = 0; n < N; n++){
+            //printf("n,k,vec[n]: %d, %d, %lf +j%lf\n",n,k,creal(vec[n]),cimag(vec[n]));
+            vec_k[k] = vec_k[k] + vec[n]*cexp(+I*2*M_PI*(double)k*n/N);
+        }
+        vec_k[k] = vec_k[k]/N;
+    }
+    return vec_k;
+}
+
 complex double* fft(int N, complex double* vector){
     // Calculates the FFT of vector of size N=2^n
-    if (N > 1){
+    if (N % 2 == 0){
         //FFT of vector
         complex double* vector_k = malloc(N*sizeof(complex double));
         //Separate even and odd entries
@@ -34,13 +57,16 @@ complex double* fft(int N, complex double* vector){
         //complex double* vector_compex = malloc(sizeof(complex double));
         //vector_compex[0] = vector[0];
         //return vector_compex;
-        return vector;
+        if (N == 1)
+            return vector;
+        else
+            return dft(N, vector);
     }
 }
 
 complex double* ifft(int N, complex double* vector_k){
     // Calculates the FFT of vector of size N=2^n
-    if (N > 1){
+    if (N % 2 == 0){
         //FFT of vector
         complex double* vector = malloc(N*sizeof(complex double));
         //Separate even and odd entries
@@ -68,18 +94,11 @@ complex double* ifft(int N, complex double* vector_k){
         //complex double* vector_compex = malloc(sizeof(complex double));
         //vector_compex[0] = vector[0];
         //return vector_compex;
-        return vector_k;
+        if (N == 1)
+            return vector_k;
+        else
+            return idft(N, vector_k);
     }
 }
 
-complex double* dft(int N, complex double*  vec){
-    complex double* vec_k = malloc(N*sizeof(complex double));
-    for (int k = 0; k < N; k++){
-        for (int n = 0; n < N; n++){
-            //printf("n,k,vec[n]: %d, %d, %lf +j%lf\n",n,k,creal(vec[n]),cimag(vec[n]));
-            vec_k[k] = vec_k[k] + vec[n]*cexp(-I*2*M_PI*(double)k*n/N);
-        }
-    }
-    return vec_k;
-}
 

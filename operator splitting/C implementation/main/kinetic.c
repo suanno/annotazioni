@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
     double* xlattice = (double*)malloc(N*sizeof(double));
     double* qlattice = (double*)malloc(N*sizeof(double));
     double tau = 0.01;
-    int Nsteps = 40000;
+    int Nsteps = 10000;
     /*Barrier parameters*/
     double xi, xf, deltax, beta, V0;
     /*Psi0 parameters*/
@@ -28,31 +28,12 @@ int main(int argc, char** argv) {
     double xc, sigma, d;
     complex double* psi = malloc(N*sizeof(complex double));     /*psi(x,t) (state)*/
     complex double* psi_k = malloc(N*sizeof(complex double));   /*psi FFT*/
-
-    /*Energy scale*/
-    alpha = 0.8;    /* 0 < alpha < 1 for tunneling (E < V0)*/
-    V0 = 1;         /*Just the ratio with E (alpha) is relevant for evolution, at least I hope so*/
-    E = alpha*V0;
-    /*Lenght scale*/
-    xi = 10;     /*Barrier start location*/
-    sigma = 1;  /*Psi0 width*/
-    beta = 2;   /*beta > 1 for barrier less wide than psi0*/
-    deltax = 2*sigma/beta;
-    xf = xi + deltax;
-    d = 1;
-    xc = xi-2*sigma-d;
-    /*Velocity scale*/
-    m = (2*alpha*V0*200*tau*tau)/(d*d); /*In order to have at least 10 steps before psi 'touches' the barrier*/
-    p = sqrt(2*m*E);
     
-    p = 1.1;
-    m = 1;
-    V0 = 0.6;
+    /*Parameters*/
+    xc = 50;
     sigma = 20;
-    xc = -50;
-    xi = -sqrt(5);
-    deltax = 2*sqrt(5);
-    xf = xi + deltax;
+    m = 1;
+    p = 1.5;    /*hbar = 1, m = 1 -> k = p = v*/
 
     /*Make lattices*/
     mk1grids(N, a, xlattice, qlattice);
@@ -69,51 +50,24 @@ int main(int argc, char** argv) {
         psi[n] = psi[n]/norm;
     write_complex_vector("before.txt", N, psi);
     /*Evolution*/
-    double t;
-    complex double* Vterm = (complex double*)malloc(N*sizeof(complex double));
     complex double* Kterm = (complex double*)malloc(N*sizeof(complex double));
 
     /*Check normalization after (IFFT * FFT)*/
-    double q;
-    double tunneled = 0;    /*Probability of finding the particle AFTER the barrier*/
-    for (int n = 0; n < N; n++){
-        x = xlattice[n];
-        if (x > xf){
-            tunneled = tunneled + cabs(psi[n])*cabs(psi[n])*a;
-        }
-    }
-    printf("Prob AFTER the barrier: %lf\n", tunneled);
+    double t, q;
 
     for(int step = 0; step < Nsteps; step++){
         t = step*tau;
         /* Operator splitting */
         /* Calculate the terms at the exponent of operator splitting Vterm and Kterm*/
         for (int n = 0; n < N; n++){
-            x = xlattice[n];
             q = qlattice[n];
-            Vterm[n] = -I*(V(x, t, xi, xf, V0)+dVdt(x,t)*tau/2)*tau/2;
             Kterm[n] = -I*((q*q)/(2*m))*tau;
-            psi[n] = cexp(Vterm[n])*psi[n];
         }
         psi_k = fft(N, psi);
         for (int k = 0; k < N; k++){
             psi_k[k] = cexp(Kterm[k])*psi_k[k];
         }
         psi = ifft(N, psi_k);
-        for (int n = 0; n < N; n++){
-            psi[n] = cexp(Vterm[n])*psi[n];
-        }
-
-        tunneled = 0;
-        for (int n = 0; n < N; n++){
-            x = xlattice[n];
-            if (x > xf){
-                tunneled = tunneled + cabs(psi[n])*cabs(psi[n])*a;
-            }
-        }
-        if (step == 1)
-            write_complex_vector("output.txt", N, psi);
-        //printf("Prob AFTER the barrier: %lf\n", tunneled);
     }
     norm = calc_norm(N, a, psi);
     printf("Final norm: %lf\n", norm);
