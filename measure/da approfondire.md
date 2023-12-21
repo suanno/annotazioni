@@ -1,6 +1,7 @@
 ## Premeasure
 - _Calcoli_ **esempio Zurek** di evoluzione dello stato dell'universo nell'interazione tra sistema e apparato.
 **Evidenziare** che, nello stato finale, i coefficienti c_k sono stati preservati, _eventualmente_ valutare se generalizzare l'esempio sostituendo singoletto con uno stato con coefficienti $alpha$ e $beta$ anziché +1 e -1.
+- Capire COME la base c_k, e quindi l'operatore misurato sul sistema, è legato all'hamiltoniana di interazione sistema-ambiente.
 
 ## Ambiguità
 Sull'**esempio precedente** mostrare che, se cambio base apparato (la nuova non è nec ortogonale), la _naturale interpretazione_ (si pensi a collasso, vedi _readme.md_) dello stato dell'universo è che posso misurare più osservabili diverse sul sistema. Esempio 2 osservabili che agiscono su $H_S$!
