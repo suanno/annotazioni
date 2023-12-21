@@ -21,6 +21,8 @@ Questa è la data in cui _formalmente_ inizio a lavorare nell'Università France
 - **Luogo di svolgimento all'estero**: Université Lyon 1 Claude Bernard
 - **Indirizzo**: 43 Bd du 11 Novembre 1918, 69100 Villeurbanne, France
 
+Lo stage si svolgerà all'istituto ILM che fa parte dell'Università. Nei documenti Erasmus sono stati inseriti i dati dell'Università perché dotata di un codice Erasmus. L'istituto invece non ha un suo codice Erasmus dedicato.
+
 # Documenti costituenti la domanda di **_ASSEGNAZIONE_** tesi
 - Richiesta assegnazione tesi:
     - Curriculum C: Fisica della Materia.
@@ -34,12 +36,11 @@ Questa è la data in cui _formalmente_ inizio a lavorare nell'Università France
 
 Gli allegati "A*" ed "Autorizzazione allo spostamento" possono essere sostituiti dall'"Accordo di mobilità Erasmus".
 
-Tuttavia gli esiti del bando Erasmus a cui partecipo uscirrano a Marzo.
+Tuttavia gli esiti del bando Erasmus a cui partecipo uscirrano a Marzo, quindi questi due documenti devono essere allegati alla richiesta.
 
 
 # Note
 - Contattare le Segreterie per aggiungere il Prof. Olivier Pierre-Louis nella lista dei relatori se non presente.
-- Su segreterie online mi fa iscrivere solo alla sessione di laurea di marzo, mentre io 
 - Minimo 40 CFU. Indicare tanti esami quanti servono per arrivare a 40 CFU.
 
 # Referenze
