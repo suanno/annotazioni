@@ -30,8 +30,6 @@ int main(int argc, char** argv) {
     complex double* psi_k = malloc(N*sizeof(complex double));   /*psi FFT*/
 
     /*Energy scale*/
-    alpha = 0.8;    /* 0 < alpha < 1 for tunneling (E < V0)*/
-    V0 = 1;         /*Just the ratio with E (alpha) is relevant for evolution, at least I hope so*/
     E = alpha*V0;
     /*Lenght scale*/
     xi = 10;     /*Barrier start location*/
