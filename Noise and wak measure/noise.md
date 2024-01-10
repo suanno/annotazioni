@@ -121,19 +121,66 @@ E' una idea naive, ma esistono dimostrazioni rigorose sul fatto che l'analogo de
 ## Misura dello stato di un qubit superconduttivo
 Sperimentalmente lo stato di un qubit superconduttivo si misura così...
 
-Quindi lo sfasamento del segnale, che è descritto dall'intensità del segnale DC, dipende dallo stato del qubit. Considerando anche il rumore presente sulla corrente DC:
-$$I(t) = <I(t)> + Noise$$
-dove, **se l'interazione con lo strumento di misura è debole**[omettendo i conti non si capisce perché si chiede], $<I(t)> = \pm I_0$ in base allo stato del qubit.
+Quindi, **assumendo che** l'ampiezza della corrente DC **coincida con** lo sfasamento dell'onda
+$$I(t) = \pm \theta_0 + \delta\theta(t)$$
+dove $\delta\theta(t)$ è il rumore sulla fase dell'onda (che discuteremo a breve), e $\pm$ rappresenta lo stato del qubit. Quindi _il valor medio_ della corrente DC contiene l'informazione sullo stato del qubit.
 
 In pratica però non si misura semplicemente il valore della corrente ad un solo istante, ma il valore della corrente integrato nel tempo (è come contare tutti gli elettroni che passano fino ad un certo tempo t).
 Il motivo per cui si sceglie di fare una misura di questo tipo, ovvero prolungata nel tempo, è che, come abbiamo visto in precedenza, la sua varianza cresce linearmente nel tempo $\sigma_m^2\sim t$, così come **la separazione** tra i valori della media di $m(t)$ per i due diversi stati del qubit $<m(t)> \sim \pm I_0t$ .
 Questo ci consente di **distinguere chiaramente** quale sia lo stato del qubit se aspettiamo sufficientemente a lungo, infatti possiamo definire un **coefficiente di risoluzione**:
 $$\eta = \frac{|<m(t)>_+-<m(t)>_-|^2}{\sigma_m^2(t)}\sim t$$
 quindi la risoluzione **cresce nel tempo** (vantaggio di misure lente) e possiamo definire **la durata della misura** come il tempo da aspettare per riuscire a distinguere chiaramente tra i due stati (e.g. $\eta = 1$).
-Siccome $\sigma_m^2\sim S_{II}(\omega = 0)$, allora:
-$$\Gamma_{measure}\sim\frac{1}{S_{II}}$$
+
+Siccome $\sigma_m^2 = S_{\theta\theta}(\omega = 0)t$, allora:
+$$\Gamma_{measure} = \frac{4\theta_0^2}{S_{\theta\theta}}$$
 
 Abbiamo presentato il vantaggio che si presenta se si fanno misure lente, ora cerchiamo di capire se ci sono anche degli svantaggi.
 
 ## Backaction
+E' ragionevole che fare una misura lenta (ovvero non istantanea, ma prolungata nel tempo) sia equivalente a fare tante misure istantanee molto vicine nel tempo.
+Tuttavia il principio di indeterminazione ci dice che se misuro un'osservabile $x$ con una precisione $\Delta x$, allora avrò una **variazione ignota** dell'osservabile coniugata $p$ che è $\Delta p \geq \hbar/(2\Delta x)$ (ignota perché non conosco il suo valore, ma solo questa disuguaglianza).
 
+Se faccio _una sola_ misura istantanea, questo effetto collaterale della misura (_backaction_) non mi da fastidio. Tuttavia, quando faccio una misura lenta, io faccio tante misure _successive_ e sarebbe un problema se la variazione ignota dell'osservabile coniugata si ripercuotesse **sui valori futuri** dell'osservabile misurata!
+Facciamo un esempio:
+
+- Se misuro il momento di una particella libera _con una misura lenta_, le variazioni ignote della posizione non sono un problema, perché il momento è una costante del moto ed i suoi valori futuri non sono influenzati dalle variazioni della posizione.
+- Se, invece, misuro la posizione, allora le _variazioni incontrollabili_ del momento influenzano i valori futuri della posizione, producendo **una traiettoria imprevedibile** se conosco solo la posizione iniziale! Dunque l'informazione sulla posizione iniziale (**che volevo misurare**) è **persa**!  
+
+Le misure lente in cui l'evoluzione dell'osservabile coniugata non dipende da queste variazioni incontrollabili dell'osservabile coniugata, si chiamano QND (Quantum non demolition).
+In queste misure, più tempo aspetto e migliore è la risoluzione della misura.
+Se, invece, la misura non è QND, allora non posso far durare la misura un tempo troppo lungo, altrimenti perdo l'informazione che voglio ottenere dalla misura.
+
+La misura dello stato di un qubit superconduttivo è QND, perché le osservabili coniugate a $\sigma z$ sono $\sigma x, \sigma y$, e la probabilità di misurare $\sigma z = 0,1$ **non dipende** dai valori di $\sigma x, \sigma y$.
+
+Più esplicitamente, pensando alla sfera di Bloch, l'accoppiamento con la cavità modifica solo la frequenza della precessione attorno a z, ma l'evoluzione dello stato resta una semplice precessione attorno a z, dunque le probabilità di misurare up o down non cambiano nel tempo.
+La variazione della frequenza è però
+$$\Delta \omega(t) = \omega_c + \chi + 2\chi \hat{n}$$
+Dove è presente del rumore su $\hat{n}$, dovuto al fatto che è possibile uno scambio di fotoni tra la cavità e l'ambiente (che in questo caso è la linea di trasmissione accoppiata) e quindi $n$ fluttua.
+Se scriviamo $n(t) = <n> + \delta n(t)$, allora l'evoluzione dell'angolo $\varphi$ nella sfera di Bloch è
+$$\varphi(t)=\varphi_0 + (\omega_c + \chi + 2\chi<n>)t + 2\chi\int_0^t dt' \delta n(t')$$
+Mentre il primo termine fornisce una evoluzione che è diversa da quella che avrei senza la cavità, ma è comunque **prevedibile**, dunque **conserva l'informazione** sul valore iniziale $\varphi_0$, il secondo termine fornisce una evoluzione incontrollabile che, dopo un po', porta ad una totale indeterminazione della fase. 
+Se misuro $\varphi(t)$ nei primi istanti, riesco _almeno_ a ricavare che $\varphi_0$ si trova in un certo intervallo. Ma mano a mano che passa il tempo, questo intervallo si ingrandisce e quando la sua lunghezza raggiunge $2\pi$, l'informazione su $\varphi_0$ è completamente persa.
+
+Siccome l'angolo $\varphi_0$ descrive la _sovrapposizione_ degli stati up e down nello stato iniziale, se perdo questa informazione significa che la matrice densità ridotta del sistema diventa diagonale.
+Quindi il tempo in cui perdo questa informazione **è il tempo di dephasing del qubit**.
+Questo tempo si può calcolare
+$$\Gamma_{deph} = 2\chi  S_{nn}$$
+
+Ora consideriamo il rapporto tra le due gamma
+$$\frac{\Gamma_{deph}}{\Gamma_{measure}} = \frac{2\chi}{4\theta_0^2}S_{nn}S_{\theta\theta}$$
+
+Il principio di indeterminazione, vincola il valore del prodotto $S_{nn}S_{\theta\theta}$ perché se considero l'onda che viaggia nella linea di trasmissione (il cui sfasamento ha memoria dello stato del qubit) la sua fase ed il numero di fotoni dell'onda (che note le dimensioni della linea determina l'ampiezza dell'onda) sono **coniugate** $\Delta N \Delta \theta \geq 1/2$.
+
+Siccome la fase viene misurata con una misura lenta, ovvero facendo una media (che equivale a misurare la fase _integrata_ nel tempo e poi dividere per il tempo), la sua varianza è $(\Delta \theta)^2 = S_{\theta\theta}/t$ (**diviso** t perché è la media, non la fase integrata). Allo stesso modo si può pensare di misurare $N$ con una misura lenta, integrando il **flusso** di fotoni, dunque $(\Delta N)^2 = S_{\dot{N}\dot{N}}t$ (**per** il tempo, perché misuro un valore integrato, non una media).
+Quindi $S_{\theta\theta}S_{\dot{N}\dot{N}}\geq1/4$.
+
+A questo punto bisogna considerare che l'ambiente in questo caso è la linea di trasmissione accoppiata alla cavità, quindi ho uno scambio di fotoni tra cavità e linea, dunque è presente un legame tra le fluttuazioni di $n$ ed $N$. Infatti si trova che $S_{nn} \propto S_{\dot{N}\dot{N}}$.
+Quindi
+
+$$\frac{\Gamma_{deph}}{\Gamma_{measure}} \propto S_{\dot{N}\dot{N}}S_{\theta\theta}$$
+e facendo conti espliciti per calcolare il coefficiente di proporzionalità, si trova che fa $4$, quindi
+
+$$\frac{\Gamma_{deph}}{\Gamma_{measure}} \geq 1$$
+dove l'uguaglianza è vera se $\Delta \theta \Delta N = 1/2$, che significa che l'onda che viaggia nella linea di trasmissione è in uno stato coerente.
+
+Il rapporto quindi non può essere inferiore ad uno, ovvero **il massimo che posso fare** è misurare se lo stato è up o down appena prima che dephasi. Appena la misura termina, ho perso tutta l'informazione sulla fase.
