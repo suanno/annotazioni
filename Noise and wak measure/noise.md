@@ -152,6 +152,8 @@ Se, invece, la misura non è QND, allora non posso far durare la misura un tempo
 
 La misura dello stato di un qubit superconduttivo è QND, perché le osservabili coniugate a $\sigma z$ sono $\sigma x, \sigma y$, e la probabilità di misurare $\sigma z = 0,1$ **non dipende** dai valori di $\sigma x, \sigma y$.
 
+#### Dephasing
+
 Più esplicitamente, pensando alla sfera di Bloch, l'accoppiamento con la cavità modifica solo la frequenza della precessione attorno a z, ma l'evoluzione dello stato resta una semplice precessione attorno a z, dunque le probabilità di misurare up o down non cambiano nel tempo.
 La variazione della frequenza è però
 $$\Delta \omega(t) = \omega_c + \chi + 2\chi \hat{n}$$
@@ -181,6 +183,37 @@ $$\frac{\Gamma_{deph}}{\Gamma_{measure}} \propto S_{\dot{N}\dot{N}}S_{\theta\the
 e facendo conti espliciti per calcolare il coefficiente di proporzionalità, si trova che fa $4$, quindi
 
 $$\frac{\Gamma_{deph}}{\Gamma_{measure}} \geq 1$$
-dove l'uguaglianza è vera se $\Delta \theta \Delta N = 1/2$, che significa che l'onda che viaggia nella linea di trasmissione è in uno stato coerente.
+dove l'uguaglianza è vera se $\Delta \theta \Delta N = 1/2$, che significa che l'onda che viaggia nella linea di trasmissione è **in uno stato coerente**.
 
-Il rapporto quindi non può essere inferiore ad uno, ovvero **il massimo che posso fare** è misurare se lo stato è up o down appena prima che dephasi. Appena la misura termina, ho perso tutta l'informazione sulla fase.
+Il rapporto quindi non può essere inferiore ad uno, ovvero **il massimo che posso fare** è misurare se lo stato è up o down appena prima che dephasi. Appena la misura termina, ho perso tutta l'informazione sulla fase tra 0 ed 1.
+
+Abbiamo trovato questo risultato considerando un particolare setup sperimentale. Tuttavia questo limite _è generale_, perché **la misura implica il dephasing del qubit**, come vediamo
+
+[Measure -> Dephasing]
+
+Questo limite, che può essere espresso in termini del noise power spectrum così
+$$\alpha S_{nn}S_{\theta\theta}\geq1$$
+è chiamato **quantum limit** ed è caratteristico di **ogni** misura quantistica.
+
+Nel più generico setup sperimentale, l'osservabile da misurare $\hat{z}$ viene accoppiata ad un'osservabile $\hat{F}$ dell'apparato sperimentale (e.g. cavità) mediante il termine di interazione $H_{int} = -\chi \hat{z}\hat{F}$. L'apparato presenta inoltre una osservabile di output $\hat{I}$ (e.g. corrente DC) che, nel suo valor medio $<I> = \pm I_0$, contiene l'informazione sullo stato.
+
+Se definiamo un **"rumore equivalente"** su $z$ **spostando il rumore** da $I$ a $z$ in questo modo
+$$I(t) = \pm I_0 + \delta I(t) = (\pm + \delta_{eq}z(t))I_0$$
+$$\delta_{eq}z = \frac{\delta I}{I_0}$$
+
+Allora il limite può essere espresso come $\sqrt{S_{zz}S_{FF}}\geq\hbar/2$, dove $S_{zz}$ è il noise power spectrum associato al rumore equivalente.
+Per avere una uguaglianza (e quindi fare una misura **quantum limited**), bisogna ingegnerizzare propriamente lo strumento di misura (nel nostro esempio questo limite è raggiunto). Inoltre questo è un limite imposto da MQ, ma esiste anche un limite classico _che si sovrappone_ a quello quantistico, ovvero
+$$\sqrt{S_{zz}S_{FF}}\geq S_{zF}$$
+Quindi, per raggiungere il limite quantistico, bisogna anche ingegnerizzare il rivelatore affinché $S_{zF} = 0$.
+
+#### Interpretazione del limite
+- Nel caso di una misura QND, il limite mi dice che, non appena ho raggiunto la risoluzione che mi permette di dire se il qubit è up o down, ho perso tutta l'informazione sulla osservabile coniugata (che è coerente con la descrizione della misura mediante il collasso della funzione d'onda del sistema).
+
+- Nel caso di una misura **NON**-QND, allora il tempo di dephasing calcolato, non descrive solo la perdita dell'informazione sull'osservabile coniugata, ma anche sull'osservabile che sto misurando!
+Perciò se $\Gamma_{measure} >> \Gamma_{deph}$, allora il risultato della misura lenta non descrive lo stato iniziale del qubit, dunque il rivelatore non svolge il suo compito.
+
+Un commento va fatto sul **tempo di decadimento** del qubit. Abbiamo detto che il noise power spectrum quantistico descrive i rate di transizione del sistema tra i suoi stati e quindi il rate di decadimento del qubit, dovuto all'interazione con l'ambiente.
+Tuttavia l'interazione con la cavità non fa altro che modificare la frequenza del qubit e quindi non modifica gli autostati, perciò non ho una probabilità di decadimento.
+L'ambiente del qubit, però, non è costituito solo dalla cavità, ma anche dalla linea di trasmissione e, sebbene il qubit non interagisca direttamente con la linea (ho un accoppiamento capacitivo tra qubit e cavità ed uno tra cavità e linea), in modo indiretto lo fa e quindi un tempo di decadimento esiste.
+L'idea naive per evitare di pensare al tempo di decadimento è considerare una cavità con un Q factor elevato e quindi un fattore di damping piccolo, questo significa che la cavità scambia poca energia per unità di tempo con la linea. Così facendo, la cavità interagisce poco con la linea e, siccome la cavità **protegge** il qubit dall'interazione con la linea, l'interazione indiretta tra qubit e linea è piccola.
+Quindi possiamo non pensare al tempo di decadimento, che altrimenti dovremmo confrontare con il tempo di misura in una misura QND (devo avere che $\Gamma_{measure}>>\Gamma_{decay}$)
