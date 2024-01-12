@@ -21,6 +21,7 @@ $$G_{II}(t,t') = <I(t)I(t')>$$
 Quale è il significato fisico di questo oggetto?
 - Se due variabili aleatorie $x,y$ sono indipendenti, allora $<xy> = 0$.
 - Se $t = t'$, allora recupero la definizione di **varianza** di $I(t)$.
+
 Ora consideriamo il caso speciale in cui uno dei due tempi è 0 e definiamo così l'autocorrelazione
 $$R_{I}(t) = <I(t)I(0)>$$
 
@@ -52,15 +53,17 @@ Usando che l'autocorrelazione è la _trasformata di Fourier inversa_ di $S(\omeg
 $$\sigma_I^2 = \frac{1}{2\pi}\int_{-\infty}^{\infty}d\omega S_{II}(\omega)$$
 per ogni tempo $t$.
 
+Quindi abbiamo trovato un'altra interpretazione del noise power spectrum. E' ragionevole che le due interpretazioni coesistano, perché la presenza di una varianza è causata dall'interazione con la sorgente di rumore **e quindi** dal fatto che ci sia un **trasferimento di energia** tra il sistema e l'ambiente. Più questa interazione è forte e più mi aspetto che la varianza sia grande. Bisogna però dire che, nonostante ci aspettiamo che per **tutte le osservabili** il noise power spectrum **descriva in qualche modo** la potenza che l'ambiente trasferisce al sistema ad una certa frequenza, non sembre questa potenza trasmessa coincide con il noise power spectrum. Per alcune osservabili questa proprietà è descritta esplicitamente, per altre no, ma comunque l'informazione ci aspettiamo sia presente, in qualche modo.
+
+
+Osserviamo poi che, in pratica, si lavora con circuiti in cui sono presenti dei filtri (e.g. Passabasso che filtrano le frequenze $\omega > \omega_{max}$).
+Siccome $S(\omega)d\omega$ rappresenta la potenza trasmessa al sistema alla frequenza $\omega$ e le frequenze superiori ad $\omega_{max}$ non si possono trasmettere, allora devo _modificare gli estremi di integrazione_ ($+\infty \rightarrow \omega_{max}$).
+
 Osserviamo che, fino a questo momento, abbiamo considerato $I(t)$ come la corrente generata dalla sorgente di rumore. In generale questa è sovrapposta al segnale che vogliamo misurare, infatti l'espressione generale di una osservabile è
 $$I(t) = <I(t)> + \text{Noise}$$
 Siccome il rumore ha media statistica nulla, allora il segnale che vogliamo misurare è la media statistica. Per calcolare $S(\omega)$ bisogna quindi sottrarre dall'osservabile la sua media statistica
 $$I(t) \rightarrow I(t)-<I(t)>$$
 
-Quindi abbiamo trovato un'altra interpretazione del noise power spectrum. E' ragionevole che le due interpretazioni coesistano, perché la presenza di una varianza è causata dall'interazione con la sorgente di rumore **e quindi** dal fatto che ci sia un **trasferimento di energia** tra il sistema e l'ambiente. Più questa interazione è forte e più mi aspetto che la varianza sia grande. Bisogna però dire che, nonostante ci aspettiamo che per **tutte le osservabili** il noise power spectrum **descriva in qualche modo** la potenza che l'ambiente trasferisce al sistema ad una certa frequenza, non sembre questa potenza trasmessa coincide con il noise power spectrum. Per alcune osservabili questa proprietà è descritta esplicitamente, per altre no, ma comunque l'informazione ci aspettiamo sia presente, in qualche modo.
-
-Osserviamo poi che, in pratica, si lavora con circuiti in cui sono presenti dei filtri (e.g. Passabasso che filtrano le frequenze $\omega > \omega_{max}$).
-Siccome $S(\omega)d\omega$ rappresenta la potenza trasmessa al sistema alla frequenza $\omega$ e le frequenze superiori ad $\omega_{max}$ non si possono trasmettere, allora devo _modificare gli estremi di integrazione_ ($+\infty \rightarrow \omega_{max}$).
 
 Consideriamo ora la corrente integrata nel tempo, questa grandezza ci tornerà utile più tardi quando parleremo di come si misura sperimentalmente lo stato di un qubit superconduttivo.
 $$m(T) = \int_0^T I(t)dt$$
@@ -104,6 +107,8 @@ Invece, in meccanica quantistica (sempre all'equilibrio termodinamico), si ottie
 - Mentre _classicamente_ posizione e momento sono variabili aleatorie indipendenti, dunque scorrelate: $<x(t)p(t)>=0$; in MQ $<\hat{x}\hat{p}>=i\hbar/2$ perché $\hat{a},\hat{a^+}$ (o equivalentemente $x,p$) non commutano.
 - Classicamente $<x^2> \sim k_bT$ per il principio di equipartizione, mentre in meccanica quantistica non è nullo a $T=0$, perchè a temperatura nulla lo stato è _certamente nel GS_, ma il valore di aspettazione di $x^2$ sul GS è la ZPF che non è zero (e non dipende dal tempo).
 $$S_{xx}(\omega) = x_{ZPF}^2\{n_{BE}(\hbar\omega)\delta(\Omega+\omega)+[n_{BE}+1]\delta(\Omega-\omega)\}$$
+
+Principare differenza: non è simmetrico!
 
 Osserviamo la presenza dei termini BE e BE+1. Questi termini compaiono nei rate di assorbimento o emissione di un fotone quando si descrive un **gas di fotoni** che interagisce con un sistema atomico. Qui invece abbiamo un oscillatore armonico (le cui eccitazioni sono bosoni e quindi è descrivibile come un gas di bosoni) che interagisce con una sorgente di rumore (ovvero l'ambiente).
 
