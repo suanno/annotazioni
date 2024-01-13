@@ -19,7 +19,7 @@ all: rmxeq mkdep mkxeq
 
 # main programs and required modules 
 
-MAIN = main test kinetic barrier parameters #metti programmi da compilare (in main)
+MAIN = free_particle #metti programmi da compilare (in main)
 
 MODULES = fft read_matrix mk1grids
 
