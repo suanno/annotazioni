@@ -12,7 +12,7 @@ Let's express all **physical quantities** as a non-dimensional factor (that is a
 - $x = Xa\hat{u_x}$, quindi il passo del reticolo spaziale è $a\hat{u_x}$ (a è adimensionale, mentre il passo ha le dimensioni di una lunghezza).
 The lattice is $X=0,1,...,N$.
 
-    So $x_c = Ca\hat{u_x}$, $\sigma = \Sigma a\hat{u_x}$.
+    So $x_c = Ca\hat{u_x}$, $\sigma = \Sigma a\hat{u_x}$, $L = N_{steps}a\hat{u_x}$
 
 - $t = T\tau\hat{u_t}$, so $tspan = N_{steps}\tau\hat{u_t}$
 
@@ -31,4 +31,13 @@ Now, if you insert any value as the variables in the code
 - $a, \tau$
 - $N, N_{steps}$
 
-AND you choose the dimensional terms (note that the choice of $H$ puts a constraint!), then you can find the values of the physical quantities!
+AND you choose the dimensional terms (note that the choice of $H$ puts a constraint!), then you can find the values of the **physical (REAL) quantities**!
+
+## Open problem
+Notice that the speed of the packed is $v = p/m$, so you can decide that, at time $t=tspan$, the packed moved of a **physical** distance $\alpha L$, by putting
+$$\frac{PH}{M} = \alpha \frac{Na}{N_{steps}\tau}$$
+
+
+But the codes behave respecting the above formula only is the mass $M$ is _sufficiently small_. Even if you set $P/M$, $M$ and then assign $P = P/M*M$ (so if you assign the velocity $p/m$ directly), the problem still exists.
+If the mass is not sufficiently small, the distance travelled is significantly smaller or the packet splits in two.
+No idea why.
