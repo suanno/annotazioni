@@ -1,48 +1,48 @@
 # Intro
-Oggi voglio presentare il ruolo che il _rumore_ gioca nella misura dello stato di un qubit superconduttivo.
+Oggi parlo del ruolo che il _rumore_ gioca nella misura dello stato di un qubit superconduttivo.
 
-Inizio presentando alcuni strumenti matematici con cui si descrive il rumore nei sistemi fisici, cercando di portare l'attenzione sul loro significato fisico e pratico piuttosto che sui conti.
+Questi sono gli argomenti principali che **toccherò**.
+- Inizio introducendo il concetto di Noise power spectrum, che è uno strumento che viene utilizzato per descrivere il rumore nei sistemi fisici.
 
-In seguito considererò il caso specifico della misura di un qubit superconduttivo, introducendo i concetti di _misura lenta_ e di misura _quantum non demolition_.
-Infine mostrerò che queste misure hanno un limite, imposto dal principio di indeterminazione.
+- In seguito parleremo di come si misura lo stato di un qubit superconduttivo, introducendo i concetti di _misura lenta_ e di misura _quantum non demolition_.
+
+- Infine mostrerò le misure in MQ hanno un limite, imposto dal principio di indeterminazione.
 
 # Rumore
-Per introdurre gli strumenti con cui descrivere il rumore in un sistema fisico, consideriamo un _semplice esempio_:
+Per introdurre gli strumenti con cui si descrive il rumore in un sistema fisico, consideriamo un _circuito elettrico_:
+#### Sorgente di rumore
+L'interazione del circuito **con l'ambiente** può essere _ragionevolmente_ descritta introducendo nel circuito una **sorgente di rumore**, rappresentata da un _generatore di **corrente**_ in serie all'**impedenza equivalente del circuito**, che qui è una resistenza per semplicità.
 
-In un circuito elettrico, l'interazione del circuito con l'ambiente può essere _ragionevolmente_ descritta introducendo nel circuito una **sorgente di rumore**, rappresentata da un _generatore di corrente fittizio_.
-Qui lo mostriamo in serie all'impedenza del circuito, che qui è una resistenza per semplicità.
+Siccome questa è una sorgente di **rumore**, la **misura** della corrente ad ogni istante $t$ è una realizzazione di una **variabile aleatoria**, la cui media statistica $<I(t)> = 0$.
 
-[Circuito Noise I source in serie resistenza]
-
-Siccome è una sorgente di rumore, la corrente $I(t)$ ad ogni istante è una realizzazione di una **variabile aleatoria**, la cui media statistica $<I(t)> = 0$.
-
-Definiamo il correlatore tra la corrente a due tempi diversi come
+Definiamo ora il correlatore tra i valori della corrente a due tempi diversi come
 $$G_{II}(t,t') = <I(t)I(t')>$$
 Quale è il significato fisico di questo oggetto?
 - Se due variabili aleatorie $x,y$ sono indipendenti, allora $<xy> = 0$.
-- Se $t = t'$, allora recupero la definizione di **varianza** di $I(t)$.
+- Se $t = t'$, allora recupero la definizione di **varianza** della corrente.
 
-Ora consideriamo il caso speciale in cui uno dei due tempi è 0 e definiamo così l'autocorrelazione
-$$R_{I}(t) = <I(t)I(0)>$$
-
-Ed infine definiamo il **noise power spectrum** associato alla corrente $I(t)$ come la **trasformata di Fourier dell'autocorrelazione**, ovvero
+Finalmente possiamo definire il **noise power spectrum** associato **all'osservabile corrente** come la **trasformata di Fourier di QUESTO CORRELATORE**, che prende il nome di autocorrelazione. 
 
 $$S_{II}(\omega) = \int_{-\infty}^{\infty}dt e^{-i\omega t}<I(t)I(0)>$$
 
-Questa grandezza descrive il rumore sulla corrente, che emerge quando la misuro. Per vederlo, presento **due interpretazioni** del noise power spectrum.
+Per vedere come questa grandezza descriva il rumore sulla osservabile corrente, presento **due interpretazioni fisiche** del noise power spectrum.
 
 ### 1) Potenza del rumore
-Consideriamo il circuito di prima, la potenza _istantanea_ dissipata nella resistenza (e quindi quella **trasferita** dalla sorgente di rumore all'impedenza) è $P(t) = RI^2$.
+Consideriamo il circuito di prima, la potenza _istantanea_ dissipata nella resistenza (e quindi quella **trasferita** dalla sorgente di rumore al circuito) è $P(t) = RI^2$.
 Se invece calcoliamo la potenza _media_ su un intervallo di tempo $T$, allora questa è $\bar{P}=\frac1T\int_0^Tdt I^2(t)$ (media integrale).
 
 Nel limite in cui l'intervallo di tempo $T$ è molto lungo, è possibile sostituire la media temporale con una media statistica e se scelgo $R=1$ per avere un risultato indipendente da R (equivale a dividere per $R$), ottengo che
 $$\bar{P} = \int_{-\infty}^{\infty}S_{II}(\omega)d\omega$$
 
-Questa relazione mi permette di **interpretare** $S(\omega)d\omega$ come la Potenza media trasferita dalla sorgente di rumore al sistema, "alla frequenza $\omega$", _ovvero con segnali_ generati dalla sorgente di rumore di frequenza nell'intervallo [$\omega, \omega+d\omega$].
+Questa relazione mi permette di **interpretare** $S(\omega)$ come la **densità di potenza media trasferita** dalla sorgente di rumore al sistema, "alla frequenza $\omega$"
+[_ovvero con segnali_ generati dalla sorgente di rumore di frequenza nell'intervallo [$\omega, \omega+d\omega$].
 
 _Informalmente_, questa interpretazione viene presentata dicendo che "lo spettro $S(\omega)$ ci dice quali frequenze costituiscono il rumore", ma sopra l'ho detto in modo esplicito.
+]
 
 ### 2) Varianza di $I(t)$
+Ora presentiamo una seconda interpretazione, più importante.
+
 La varianza della r.v. $I(t)$ è per definizione $$\sigma_{I(t)}^2 = <I^2(t)>$$ (perché $<I(t)>=0$).
 Se assumiamo che il rumore sia stazionario, ovvero che la varianza di $I(t)$ non dipenda dal tempo
 
@@ -53,31 +53,32 @@ Usando che l'autocorrelazione è la _trasformata di Fourier inversa_ di $S(\omeg
 $$\sigma_I^2 = \frac{1}{2\pi}\int_{-\infty}^{\infty}d\omega S_{II}(\omega)$$
 per ogni tempo $t$.
 
-Quindi abbiamo trovato un'altra interpretazione del noise power spectrum. E' ragionevole che le due interpretazioni coesistano, perché la presenza di una varianza è causata dall'interazione con la sorgente di rumore **e quindi** dal fatto che ci sia un **trasferimento di energia** tra il sistema e l'ambiente. Più questa interazione è forte e più mi aspetto che la varianza sia grande. Bisogna però dire che, nonostante ci aspettiamo che per **tutte le osservabili** il noise power spectrum **descriva in qualche modo** la potenza che l'ambiente trasferisce al sistema ad una certa frequenza, non sembre questa potenza trasmessa coincide con il noise power spectrum. Per alcune osservabili questa proprietà è descritta esplicitamente, per altre no, ma comunque l'informazione ci aspettiamo sia presente, in qualche modo.
+[Quindi abbiamo trovato un'altra interpretazione del noise power spectrum. E' ragionevole che le due interpretazioni coesistano, perché la presenza di una varianza(**quindi di fluttuazioni nel tempo**) è causata dall'interazione con la sorgente di rumore **e quindi** dal fatto che ci sia un **trasferimento di energia** tra il sistema e l'ambiente. Più questa interazione è forte e più mi aspetto che la varianza sia grande. Bisogna però dire che, nonostante ci aspettiamo che per **tutte le osservabili** il noise power spectrum **descriva in qualche modo** la potenza che l'ambiente trasferisce al sistema ad una certa frequenza, non sempre questa potenza trasmessa coincide con il noise power spectrum. Per alcune osservabili questa proprietà è descritta esplicitamente, per altre no, ma comunque l'informazione ci aspettiamo sia presente, in qualche modo.]
 
 
-Osserviamo poi che, in pratica, si lavora con circuiti in cui sono presenti dei filtri (e.g. Passabasso che filtrano le frequenze $\omega > \omega_{max}$).
-Siccome $S(\omega)d\omega$ rappresenta la potenza trasmessa al sistema alla frequenza $\omega$ e le frequenze superiori ad $\omega_{max}$ non si possono trasmettere, allora devo _modificare gli estremi di integrazione_ ($+\infty \rightarrow \omega_{max}$).
+#### Proprietà del noise power spectrum
+Consideriamo ora alcune proprietà del noise power spectrum.
+- Il correlatore è sempre reale, perché la corrente è reale. Quindi la sua trasformata di Fourier è simmetrica.
+- Inoltre, in pratica, nel mio sistema sono presenti dei filtri che limitano l'intervallo di frequenze che si possono trasmettere. Dunque il noise power spectrum viene integrato solo in questo intervallo, perché **non esiste una potenza** associata alle **altre** frequenze!
+- Un'altra considerazione pratica è che in generale oltre alla sorgente di rumore può esserci **un altro generatore di corrente**, la corrente totale è la **somma** dei due contributi e per calcolare il noise power spectrum considero **solo la componente rumorosa**.
 
-Osserviamo che, fino a questo momento, abbiamo considerato $I(t)$ come la corrente generata dalla sorgente di rumore. In generale questa è sovrapposta al segnale che vogliamo misurare, infatti l'espressione generale di una osservabile è
-$$I(t) = <I(t)> + \text{Noise}$$
-Siccome il rumore ha media statistica nulla, allora il segnale che vogliamo misurare è la media statistica. Per calcolare $S(\omega)$ bisogna quindi sottrarre dall'osservabile la sua media statistica
-$$I(t) \rightarrow I(t)-<I(t)>$$
-
-
+#### Corrente integrata nel tempo
 Consideriamo ora la corrente integrata nel tempo, questa grandezza ci tornerà utile più tardi quando parleremo di come si misura sperimentalmente lo stato di un qubit superconduttivo.
 $$m(T) = \int_0^T I(t)dt$$
 Considerando $I(t)$ come _la sola parte rumorosa_ della corrente (abbiamo detto che questa è la parte da considerare per calcolare la varianza), si ha che $<I(t)> = 0$ e quindi $<m(T)> = 0$. Di conseguenza è possibile calcolare la varianza di $m(T)$ come
 $$<m^2(T)> = \int_{-\infty}^{\infty}d\omega \frac{S_{II}(\omega)}{\omega^2}(1-cos(\omega T))\sim S_{II}(\omega = 0)*T$$
-dove il limite è valido per tempi T grandi.
+dove il limite è valido **per tempi T grandi**.
 
-Il tempo $T$ è il tempo trascorso da quando ho iniziato a raccogliere le misure della corrente per calcolare (uno stimatore di) m(T); quindi è la **durata della misura**. L'idea intuitiva secondo la quale **solo** il valore di $S(\omega)$ ad $\omega = 0$ è rilevante nel calcolo della varianza di $m(T)$ è questa:
+Il tempo $T$ è il tempo trascorso da quando ho iniziato a raccogliere le misure della corrente per calcolare (uno stimatore di) m(T); quindi è la **durata della misura**.
+
+[L'idea intuitiva secondo la quale **solo** il valore di $S(\omega)$ ad $\omega = 0$ è rilevante nel calcolo della varianza di $m(T)$ è questa:
 
 Se scompongo il rumore come una somma di segnali periodici con frequenze differenti, $S(\omega)$ mi da informazioni sull'intensità della componente del rumore di frequenza $\omega$ (questo è vero per le considerazioni fatte sulla interpretazione di $S(\omega)$ come "potenza del rumore"). Integrando le componenti di frequenza alta (quindi periodo piccolo) nel tempo, quando il tempo di misura $T$ supera il periodo del segnale, **tale somma fa zero**.
-Questa idea è sostenuta dal fatto che l'integranda diventa piccata in $\omega = 0$ al crescere della durata della misura.
+Questa idea è sostenuta dal fatto che l'integranda diventa piccata in $\omega = 0$ al crescere della durata della misura.]
 
 [Grafico]
 
+#### TCL
 Prima di generalizzare questi concetti in meccanica quantistica, voglio evidenziare che l'ultimo risultato ottenuto (_espressione della_ varianza della corrente integrata) è coerente con il TCL.
 
 Dalla corrente integrata è possibile calcolare la media temporale della corrente come _media integrale_ $\bar{I}(T) = \frac{<m(T)>}{T}$ e la varianza sulla media va come $\sim \frac{T}{T^2}=\frac{1}{T}$ (quadrato perché quando calcolo $<m^2>$ ho un quadrato).
@@ -112,21 +113,21 @@ Abbiamo generalizzato il concetto di Noise power spectrum in MQ, tuttavia
 
 #### Oscillatore armonico
 
-Per cercare questo analogo,consideriamo un sistema semplice, ovvero un oscillatore armonico e presentiamo il noise power spectrum _della posizione_, considerando che il sistema **interagisca con un bagno termico** e sia **all'equilibrio** termodinamico.
+**Per cercare questo analogo**,consideriamo un sistema semplice, ovvero un oscillatore armonico e presentiamo il noise power spectrum _della posizione_, considerando che il sistema **interagisca con un bagno termico** e sia **all'equilibrio** termodinamico.
 Presentiamo il rumore sia classicamente che in MQ.
 
 Classicamente, all'equilibrio termodinamico, $S_{xx}(\omega) = \frac{k_bT}{M\Omega^2}[\delta(\omega-\Omega)+\delta(\omega+\Omega)]$ dove $\Omega$ ed M sono la frequenza e la massa dell'oscillatore.
 Il rumore si annulla se la temperature T=0K e le due delta rappresentano che lo scambio di energia avviene solo alla frequenza dell'oscillatore.
 
-Invece, in meccanica quantistica (sempre all'equilibrio termodinamico), si ottiene una espressione diversa, per due motivi:
+Invece, in meccanica quantistica (sempre all'equilibrio termodinamico), **si ottiene una espressione diversa**, per due motivi:
 - Mentre _classicamente_ posizione e momento sono variabili aleatorie indipendenti, dunque scorrelate: $<x(t)p(t)>=0$; in MQ $<\hat{x}\hat{p}>=i\hbar/2$ perché $\hat{a},\hat{a^+}$ (o equivalentemente $x,p$) non commutano.
 - Classicamente $<x^2> \sim k_bT$ per il principio di equipartizione, mentre in meccanica quantistica non è nullo a $T=0$, perchè a temperatura nulla lo stato è _certamente nel GS_, ma il valore di aspettazione di $x^2$ sul GS è la ZPF che non dipende da T e non è nullo!
 
 #### Oscillatore quantistico
 
-Principali differenze: 
-- Non è nullo a T=0K! (perché nBE = 0, ecc.). Questo rumore, che ho anche allo zero assoluto, non esiste classicamente perché non è dato dall'interazione con una sorgente di rumore (che in questo esempio è un bagno termico), ma dal fatto che il ground state non è un autostato della posizione. Quindi, se faccio tante misure della posizione sul ground state, la loro distribuzione sarà _caratterizzata da una varianza_ pari ad $x_{ZPF}$.
-- Non è simmetrico ed ora cerchiamo di **interpretare** questa asimmetria.
+Osserviamo che: 
+- Non è nullo a T=0K! (perché nBE = 0, ecc.). Questo rumore, che ho anche allo zero assoluto, non esiste classicamente perché **non è dato dall'interazione** con una sorgente di rumore (che in questo esempio è un bagno termico), ma dal fatto che il ground state non è un autostato della posizione. Quindi, se faccio tante misure della posizione sul ground state, la loro distribuzione sarà _caratterizzata da una varianza_ pari ad $x_{ZPF}$.
+- Inoltre non è simmetrico ed ora cerchiamo di **interpretare** questa asimmetria.
 
 Osserviamo la presenza dei termini BE e BE+1. Questi termini compaiono nei rate di assorbimento o emissione di un fotone quando si descrive un **gas di fotoni** che interagisce con un sistema atomico. Qui invece abbiamo un oscillatore armonico (le cui eccitazioni sono bosoni e quindi è descrivibile come un gas di bosoni) che interagisce con una sorgente di rumore (ovvero l'ambiente).
 
@@ -163,99 +164,118 @@ Questo ci consente di **distinguere chiaramente** quale sia lo stato del qubit s
 $$\eta = \frac{|<m(t)>_+-<m(t)>_-|^2}{\sigma_m^2(t)}\sim t$$
 quindi la risoluzione **cresce nel tempo** (**QUESTO** è il vantaggio di misure lente) e possiamo definire **la durata della misura** come il tempo da aspettare per riuscire a distinguere chiaramente tra i due stati (e.g. $\eta = 1$).
 
-Abbiamo presentato il vantaggio che si presenta se si fanno misure lente, ora cerchiamo di capire se ci sono anche degli svantaggi.
-
+#### VANTAGGI / SVANTAGGI di una misura lenta
+Questo è il vantaggio di fare una misura lenta, ora cerchiamo di capire se ci sono **anche** degli **svantaggi**.
 ## Backaction
-E' ragionevole che fare una misura lenta (ovvero non istantanea, ma prolungata nel tempo) sia equivalente a fare tante misure istantanee molto vicine nel tempo.
+Ragionevolmente, fare una misura lenta (ovvero non istantanea, ma prolungata nel tempo) è equivalente a fare tante misure istantanee molto vicine nel tempo.
 Tuttavia il principio di indeterminazione ci dice che se misuro un'osservabile $x$ con una precisione $\Delta x$, allora avrò una **variazione ignota** dell'osservabile coniugata $p$ che è $\Delta p \geq \hbar/(2\Delta x)$ (ignota perché non conosco il suo valore, ma solo questa disuguaglianza).
 
-Se faccio _una sola_ misura **istantanea**, questo effetto collaterale (_backaction_) non ha alcun effetto sulla misura. Tuttavia, quando faccio una misura lenta, io faccio tante misure _successive_ e sarebbe un problema se la variazione ignota dell'osservabile coniugata si ripercuotesse **sui valori futuri** dell'osservabile misurata!
+Se faccio _una sola_ misura istantanea, questo effetto collaterale della misura (_backaction_) non mi da fastidio. Tuttavia, quando faccio una misura lenta, io faccio tante misure _successive_ e sarebbe un problema se la variazione ignota dell'osservabile coniugata si ripercuotesse **sui valori futuri** dell'osservabile misurata!
 Facciamo un esempio:
 
 - Se misuro il momento di una particella libera _con una misura lenta_, le variazioni ignote della posizione non sono un problema, perché il momento è una costante del moto ed i suoi valori futuri non sono influenzati dalle variazioni della posizione.
-- Se, invece, misuro la posizione, allora le _variazioni incontrollabili_ del momento influenzano i valori futuri della posizione, producendo **una traiettoria imprevedibile** se conosco solo la posizione iniziale! Dunque, dalle misure della posizione in questi istanti (lontani), non posso ricavare la posizione iniziale. L'informazione sulla quantità (**che volevo misurare**) è **persa**!  
+- Se, invece, misuro la posizione, allora le _variazioni incontrollabili_ del momento influenzano i valori futuri della posizione, producendo **una traiettoria imprevedibile** se conosco solo la posizione iniziale! Dunque l'informazione sulla posizione iniziale (**che volevo misurare**) è **persa**!  
 
 Le misure lente in cui l'evoluzione dell'osservabile coniugata non dipende da queste variazioni incontrollabili dell'osservabile coniugata, si chiamano QND (Quantum non demolition).
-In queste misure, **più tempo aspetto e migliore è la risoluzione della misura**.
+In queste misure, più tempo aspetto e migliore è la risoluzione della misura.
 Se, invece, la misura non è QND, allora non posso far durare la misura un tempo troppo lungo, altrimenti perdo l'informazione che voglio ottenere dalla misura.
 
-[**Insistere** sul fatto che il problema non sia che la grandezza osservata varia nel tempo, MA che varia in modo **imprevedibile**. Torneremo presto su questo concetto parlando della misura dello stato del qubit (tempo di dephasing)]
-
-#### QND
-Si vede che Qubit measure è QND **includendo esplicitamente** l'hamiltoniana di interazione con lo strumento di misura e vedendo che la variazione dell'hamiltoniana corrisponde solamente ad una variazione della frequenza del qubit. Quindi influenza la precessione dello stato del qubit nella sfera di Bloch, **ma non le probabilità**.
-Un altro modo per vedere che la misura è QND è lavorare nella picture di Heisemberg, dove vedo che l'osservabile misurata $\hat{\sigma}_3$ è costante nel tempo (e quindi non varia in modo **incontrollato**).
-Da questa espressione (che è l'equazione di Shrodinger nella picture di Heisemberg), possiamo **ricavare una relazione formale** per **QND**, ovvero: "Una misura è QND se l'osservabole misurata non commuta con $H_int$".
-
-Compare solo il termine di interazione, perché **è quello che introduce l'evoluzione incontrollata**, siccome è quello associato al fatto che sto misurando. Oppure, se voglio vederla in modo più esplicito, $\hat{n}$ è un'osservabile rumorosa ed **è questo rumore a causare** l'evoluzione imprevedibile dell'osservabile misurata.
+La misura dello stato di un qubit superconduttivo è QND, perché **se descrivo** la backaction non attraverso il principio di indeterminazione, ma considerando esplicitamente l'hamiltoniana di interazione con lo strumento di misura (cavità), trovo che precessiome...
+Posso vedere che la misura è QND anche nella picture di Heisemberg...
+Da questa ultima espressione trovo....
 
 #### Dephasing
 
 Più esplicitamente, pensando alla sfera di Bloch, l'accoppiamento con la cavità modifica solo la frequenza della precessione attorno a z, ma l'evoluzione dello stato resta una semplice precessione attorno a z, dunque le probabilità di misurare up o down non cambiano nel tempo.
-
-La variazione della frequenza è però questa
+La variazione della frequenza è però
 $$\Delta \omega(t) = \omega_c + \chi + 2\chi \hat{n}$$
-Contiene $\hat{n}$ che è un'osservabile **rumorosa**, dove questo rumore è dovuto al fatto che è possibile uno **scambio di fotoni** tra la cavità e l'ambiente (che in questo caso è la linea di trasmissione accoppiata) e quindi $n$ fluttua.
-Se scriviamo $n(t) = <n> + \delta n(t)$, allora l'evoluzione della **"fase tra 0 e 1"** $\varphi$ nella sfera di Bloch è
+Dove è presente del rumore su $\hat{n}$, dovuto al fatto che è possibile uno scambio di fotoni tra la cavità e l'ambiente (che in questo caso è la linea di trasmissione accoppiata) e quindi $n$ fluttua.
+Se scriviamo $n(t) = <n> + \delta n(t)$, allora l'evoluzione dell'angolo $\varphi$ nella sfera di Bloch è
 $$\varphi(t)=\varphi_0 + (\omega_c + \chi + 2\chi<n>)t + 2\chi\int_0^t dt' \delta n(t')$$
-Mentre il primo termine fornisce una evoluzione che è diversa da quella che avrei senza la cavità, ma è comunque **prevedibile**, dunque **conserva l'informazione** sul valore iniziale $\varphi_0$, il secondo termine fornisce una evoluzione incontrollabile che, dopo un po', porta ad una **totale indeterminazione** della fase. 
+Mentre il primo termine fornisce una evoluzione che è diversa da quella che avrei senza la cavità, ma è comunque **prevedibile**, dunque **conserva l'informazione** sul valore iniziale $\varphi_0$, il secondo termine fornisce una evoluzione incontrollabile che, dopo un po', porta ad una totale indeterminazione della fase. 
 Se misuro $\varphi(t)$ nei primi istanti, riesco _almeno_ a ricavare che $\varphi_0$ si trova in un certo intervallo. Ma mano a mano che passa il tempo, questo intervallo si ingrandisce e quando la sua lunghezza raggiunge $2\pi$, l'informazione su $\varphi_0$ è completamente persa.
 
-#### Calcolo tempo dephasing
-Il tempo in cui perdo l'informazione sulla fase lo posso calcolare, cercando quanto tempo impiega la varianza del termine imprevedibile (che definisce la larghezza dell'intervallo **in cui è indeterminata la fase**) a raggiungere $2\pi$. 
+Siccome l'angolo $\varphi_0$ descrive la _sovrapposizione_ degli stati up e down nello stato iniziale, se perdo questa informazione significa che la matrice densità ridotta del sistema diventa diagonale.
+Quindi il tempo in cui perdo questa informazione **è il tempo di dephasing del qubit**.
+Questo tempo si può calcolare
+$$\Gamma_{deph} = 2\chi  S_{nn}$$
 
-Se ora considero la matrice densità (ridotta del sistema) la fase $\varphi_0$ compare nelle entrate off-diagonal, **perché** descrive la _sovrapposizione_ degli stati up e down nello stato **iniziale**. Se la fase è completamente indeterminata, allora le entrate off-diagonal svaniscono e lo fanno in un tempo che è quello con cui perdo informazione su $\varphi_0$.
-Quindi è il tempo di dephasing del qubit.
-
-### Limite quantistico
 Ora consideriamo il rapporto tra le due gamma
-$$\frac{\Gamma_{deph}}{\Gamma_{measure}} = \frac{4\chi^2}{4\theta_0^2}S_{nn}S_{\theta\theta}$$
+$$\frac{\Gamma_{deph}}{\Gamma_{measure}} = \frac{2\chi}{4\theta_0^2}S_{nn}S_{\theta\theta}$$
 
-Si può mostrare, calcolando esplicitamente lo sfasamento $\theta_0$ in funzione dell'intensità dell'accoppiamento $\chi$. E si trova che il rapporto è 1, se l'onda che viaggia nella linea (il cui sfasamento **registra lo stato** del qubit) è preparata in uno **stato coerente**.
+#### Limite quantistico, presento disequazione
+Si può dimostrare (ed ora faremo vedere **solo l'idea da seguire**, senza fare una dimostrazione completa) che questo rapporto fa 1, se l'onda che viaggia nella linea (il cui sfasamento contiene informazione sullo stato del qubit) è preparata in uno stato corente.
 
-In particolare, in ogni sistema fisico, il rapporto non può essere inferiore ad uno, ovvero **il massimo che posso fare** è misurare se lo stato è up o down appena prima che dephasi. Appena la misura termina, ho perso tutta l'informazione sulla fase tra 0 ed 1.
+Questo risultato non è solo vero in questo esempio, ma è un risultato generale e prende il nome di **LIMITE QUANTISTICO DI UNA MISURA**.
+In generale, non è possibile fare di meglio di così, **il tempo** in cui il qubit dephasa è **sempre più piccolo** (al più uguale) della durata della misura (ovvero il tempo necessario per capire in quale stato si trovi il qubit).
+Questo perché **il solo atto di misurare** causa il dephasing del sistema (anche questo lo vedremo tra poco).
 
-#### Questo risultato discende da P. indeterminazione
-Il principio di indeterminazione, vincola il valore del prodotto $S_{nn}S_{\theta\theta}$ perché se considero l'onda che viaggia nella linea di trasmissione (il cui sfasamento ha memoria dello stato del qubit) la sua fase ed il numero di fotoni dell'onda (che note le dimensioni della linea determina l'ampiezza dell'onda) sono **coniugate** $\Delta N \Delta \theta \geq 1/2$.
+#### Limite quantistico Qubit: Idea ricavazione
+Ora presento, **brevemente**, quale è l'idea da seguire per trovare che nella misura dello stato del qubit si raggiunge il limite quantistico. La ragione per cui ci tengo a presentare **almeno questa idea** è che voglio mostrare **esplicitamente** come questo limite sia una conseguenza **diretta del principio di indeterminazione**.
 
-Siccome la fase viene misurata con una misura lenta, ovvero facendo una media (che equivale a misurare la fase _integrata_ nel tempo e poi dividere per il tempo), la sua varianza è $(\Delta \theta)^2 = S_{\theta\theta}/t$ (**diviso** t perché è la media, non la fase integrata). Allo stesso modo si può pensare di misurare $N$ con una misura lenta, integrando il **flusso** di fotoni, dunque $(\Delta N)^2 = S_{\dot{N}\dot{N}}t$ (**per** il tempo, perché misuro un valore integrato, non una media).
-Quindi $S_{\theta\theta}S_{\dot{N}\dot{N}}\geq1/4$.
+Se considero l'onda che viaggia nella linea di trasmissione, la sua fase ed il numero di fotoni dell'onda (che note le dimensioni della linea, determina l'ampiezza dell'onda) sono **coniugate**, quindi le loro varianze soddisfano questa relazione con un "maggiore o uguale".
+Se poi chiedo che l'onda venga preparata in uno stato coerente, uno stato coerente è uno stato in cui la disuguaglianza di Heisemberg è una uguaglianza.
 
-A questo punto bisogna considerare che l'ambiente in questo caso è la linea di trasmissione accoppiata alla cavità, quindi ho uno scambio di fotoni tra cavità e linea, dunque è presente un legame tra le fluttuazioni di $n$ ed $N$. Infatti si trova che $S_{nn} \propto S_{\dot{N}\dot{N}}$.
-Quindi
+Perché scrivo questa relazione? Perché abbiamo visto all'inizio come il noise power spectrum possa essere utilizzato per calcolare la varianza di un'osservabile. Quindi dalla varianza posso calcolare il noise power spectrum.
 
-$$\frac{\Gamma_{deph}}{\Gamma_{measure}} \propto S_{\dot{N}\dot{N}}S_{\theta\theta}$$
-e facendo conti espliciti per calcolare il coefficiente di proporzionalità, si trova che fa $4$, quindi
+Se faccio una misura lenta, infatti
+- la misura della fase è una **media integrale** sulle misure istantanee della corrente DC, perciò la varianza va come 1/t (come nel TCL).
+- mentre il numero di fotoni nella linea lo misuro **integrando nel tempo** il flusso di fotoni ad una estremità della linea, quindi la varianza cresce linearmente nel tempo.
 
-$$\frac{\Gamma_{deph}}{\Gamma_{measure}} \geq 1$$
-dove l'uguaglianza è vera se $\Delta \theta \Delta N = 1/2$, che significa che l'onda che viaggia nella linea di trasmissione è **in uno stato coerente**.
+Così però trovo una relaziome in cui compare il rumore sul flusso di fotoni nella linea e non sul numero di fotoni nella cavità.
+L'**idea naive** però è che la linea e la cavità interagiscono, scambiando energia (quindi fotoni), quindi **esiste un legame** fra le **fluttuazioni** del flusso e quelle sul numero di fotoni nella cavità.
+In particolare sono proporzionali e questo mi consente di calcolare il rapporto tra i rate (SE conosco il coefficiente di proporzionalità).
+Non mostrato esplicitamente che il rapporto fa 1, ma almeno abbiamo visto che
+- Questo risultato discende direttamente dalla relazione di Heisemberg
+- Inoltre abbiamo avuto una ulteriore evidenza del fatto che il noise power spectrum sia uno strumento **utile** per descrivere **cosa succede in una misura** sperimentale.
 
-#### Measure implica dephasing
-Abbiamo trovato questo risultato considerando un particolare setup sperimentale. Tuttavia questo limite _è generale_, perché **la misura implica il dephasing del qubit**, come vediamo
+Ora vediamo che il limite quantistico **è presente in ogni misura** e non solo caratteristico del setup che stiamo studiando.
 
-[...]
-#### Riflessioni sul quantum limit (diverse formulazioni)
-Concettualmente il limite è questo (sopra), tuttavia voglio mostrarvi che il limite si può esprimere 
+#### La misura provoca il dephasing del qubit
+Voglio farvi vedere che che il dephasinh è una conseguenza della misura.
+L'idea è che **prima di accendere l'interazione** tra il sistema e lo strumento di misura (tra il qubit e la cavità per fare un esempio) il sistema totale (sistema + apparato sperimemtale) si troverà in uno stato separabile.
 
-Questo limite, che può essere espresso in termini del noise power spectrum così
-$$\alpha S_{nn}S_{\theta\theta}\geq1$$
-è chiamato **quantum limit** ed è caratteristico di **ogni** misura quantistica.
+Quando accendo l'interazione, nasce una correlazione tra gli stati up e down e due **diversi** stati dell'apparato, questa correlazione **DEVE emergere** perché ci permette di **sapere** in che stato è collassato il qubit dopo la misura, **guardando** lo stato dell'apparato (uso la parola "guardare" perché l'apparato è disposto di un oggetto macroscopico, come una **lancetta** e gli stati dell'apparato **devono** descrivere le diverse possibili posizioni della lancetta).
+Dopo che è passato il tempo della misura, devo poter **distinguere chiaramente** in quale stato si trovi il qubit, perciò l'**idea naive** è che le posizioni delle lancette associate ai due stati devono essere sensibilmente diverse **e quindi** non ci deve essere overlap tra gli stati dell'apparato corrispondenti.
 
-Nel più generico setup sperimentale, l'osservabile da misurare $\hat{z}$ viene accoppiata ad un'osservabile $\hat{F}$ dell'apparato sperimentale (e.g. cavità) mediante il termine di interazione $H_{int} = -\chi \hat{z}\hat{F}$. L'apparato presenta inoltre una osservabile di output $\hat{I}$ (e.g. corrente DC) che, nel suo valor medio $<I> = \pm I_0$, contiene l'informazione sullo stato.
+Questa richiesta di ortogonalità fa sì che, se prendo la matrice densità dello stato **finale** (quindi faccio il ket bra dello stato finale), quando traccio via i gradi di libertà dell'apparato, i termini con "ket up bra down" (o viceversa) scompaiono, quindi la matrice densità ridotta, dopo la misura, è off diagonal.
+Quindi il qubit dephasa prima di aver concluso la misura.
 
-Se definiamo un **"rumore equivalente"** su $z$ **spostando il rumore** da $I$ a $z$ in questo modo
-$$I(t) = \pm I_0 + \delta I(t) = (\pm + \delta_{eq}z(t))I_0$$
-$$\delta_{eq}z = \frac{\delta I}{I_0}$$
+#### Formulazione alternativa
+Ora voglio presentare una formulazione alternativa del limite quantistico, in termini del noise power spectrum. La formulazione in termini di tempi di misura e dephasing è più concettuale, mentre quella in termini di rumore è quella più pratica.
 
-Allora il limite può essere espresso come $\sqrt{S_{zz}S_{FF}}\geq\hbar/2$, dove $S_{zz}$ è il noise power spectrum associato al rumore equivalente.
-Per avere una uguaglianza (e quindi fare una misura **quantum limited**), bisogna ingegnerizzare propriamente lo strumento di misura (nel nostro esempio questo limite è raggiunto). Inoltre questo è un limite imposto da MQ, ma esiste anche un limite classico _che si sovrappone_ a quello quantistico, ovvero
-$$\sqrt{S_{zz}S_{FF}}\geq S_{zF}$$
-Quindi, per raggiungere il limite quantistico, bisogna anche ingegnerizzare il rivelatore affinché $S_{zF} = 0$.
+Innanzitutto osserviamo che è possibile definire un rumore equivalente sull'osservabile misurata (lo stato del qubit) **spostando** il rumore sulla corrente DC **nello stato** del qubit.
+Il rumore equivalente quindi dipende dal rumore **vero** in questo modo.
 
-#### Interpretazione del limite
-- Nel caso di una misura QND, il limite mi dice che, non appena ho raggiunto la risoluzione che mi permette di dire se il qubit è up o down, ho perso tutta l'informazione sulla osservabile coniugata (che è coerente con la descrizione della misura mediante il collasso della funzione d'onda del sistema).
+Consideriamo poi l'hamiltoniana di interazione tra il sistema e lo strumento di misura (per un setup generico). Affinché possa misurare l'osservabile $\hat{z}$ del sistema devo accoppiarla con un'osservabile $\hat{F}$ dello strumento (per fare un esempio, nel caso del qubit superconduttivo accoppio sigma z con n numero fotoni della cavità **per l'intenstà dell'accoppiamento**).
 
-- Nel caso di una misura **NON**-QND, allora il tempo di dephasing calcolato, non descrive solo la perdita dell'informazione sull'osservabile coniugata, ma anche sull'osservabile che sto misurando!
-Perciò se $\Gamma_{measure} >> \Gamma_{deph}$, allora il risultato della misura lenta non descrive lo stato iniziale del qubit, dunque il rivelatore non svolge il suo compito.
+A questo punto, è possibile esprimere il rapporto dei rate in termini del rumore equivalente sullo stato del qubit e di quello sull'osservabile F.
+Se ora richiedo che sia maggiore o uguale a 0, trovo una espressione del limite quantistico che riflette la forma della formula di Heisemberg!
+Questa disuguaglianza mi dice che il rumore su un osservabile non può mai essere nullo.
+
+Oltre a questo limite quantistico, è presente anche un **limite classico**, che non deriva dal principio di indeterminazione (quindi è classico), che si sovrappone a quello quantistico.
+
+Questo è la disuguaglianza che il rumore soddisfa in una misura QND. Se il setup è ingegnerizzato in modo che le fluttuazioni su z ed F siano scorrelate e la disuguaglianza diventa una uguaglianza, allora si raggiunge il limite quantistico.
+
+Se però la misura **NON è QND**, allora **non è possibile raggiungere questo limite!**
+
+#### NON-QND
+Se è presente una backaction sulla osservabile che sto misurando, allora oltre al rumore equivalente sull'osservabile misurata, ho anche un rumore **VERO introdotto dalla misura**.
+
+Facciamo un esempio, considerando un oscillatore armonico.
+Misurare la posizione, significa misurar le due quadrature, MA queste sono osservabili coniugate (perché posizione e momento lo sono).
+Mentre nel qubit superconduttivo la perdita dell'informazione sull'osservabile coniugata $\sigma_x$ non era rilevante ai fini della misura, qui lo è perché **entrambe** le osservabili coniugate compaiono in questa espressione!
+Dunque il tempo di dephasing, in questo caso descrive un rate di **perdita dell'informazione che STO CERCANDO di ottenere**, quindi ha un significato ben diverso da quello che aveva prima!
+
+#### Cenni sul limite quantistico degli amplificatiori
+...
+
+#### Conclusione
+Ricapitolando i concetti più importani
+- Il noise power spectrum ci permette di quantificare la varianza che descrive la distribuzione delle misure nel tempo.
+- Il rumore è sempre presente su ogni osservabile, come afferma il limite .
+
+#### [SUPER-EXTRA] Tempo di decadimento (Protezione)
 
 Un commento va fatto sul **tempo di decadimento** del qubit. Abbiamo detto che il noise power spectrum quantistico descrive i rate di transizione del sistema tra i suoi stati e quindi il rate di decadimento del qubit, dovuto all'interazione con l'ambiente.
 Tuttavia l'interazione con la cavità non fa altro che modificare la frequenza del qubit e quindi non modifica gli autostati, perciò non ho una probabilità di decadimento.
