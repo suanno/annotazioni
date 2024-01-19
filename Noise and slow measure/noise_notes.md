@@ -1,4 +1,5 @@
 # Intro
+<<<<<<< HEAD:Noise and slow measure/noise_last.md
 Oggi parlo del ruolo che il _rumore_ gioca nella misura dello stato di un qubit superconduttivo.
 
 Questi sono gli argomenti principali che **toccherò**.
@@ -29,11 +30,48 @@ Per vedere come questa grandezza descriva il rumore sulla osservabile corrente, 
 
 ### 1) Potenza del rumore
 Consideriamo il circuito di prima, la potenza _istantanea_ dissipata nella resistenza (e quindi quella **trasferita** dalla sorgente di rumore al circuito) è $P(t) = RI^2$.
+=======
+Oggi voglio presentare il ruolo che il _rumore_ gioca nella misura dello stato di un qubit superconduttivo.
+
+Inizio presentando alcuni strumenti matematici con cui si descrive il rumore nei sistemi fisici, cercando di portare l'attenzione sul loro significato fisico e pratico piuttosto che sui conti.
+
+In seguito considererò il caso specifico della misura di un qubit superconduttivo, introducendo i concetti di _misura lenta_ e di misura _quantum non demolition_.
+Infine mostrerò che queste misure hanno un limite, imposto dal principio di indeterminazione.
+
+# Rumore
+Per introdurre gli strumenti con cui descrivere il rumore in un sistema fisico, consideriamo un _semplice esempio_:
+
+In un circuito elettrico, l'interazione del circuito con l'ambiente può essere _ragionevolmente_ descritta introducendo nel circuito una **sorgente di rumore**, rappresentata da un _generatore di corrente fittizio_.
+Qui lo mostriamo in serie all'impedenza del circuito, che qui è una resistenza per semplicità.
+
+[Circuito Noise I source in serie resistenza]
+
+Siccome è una sorgente di rumore, la corrente $I(t)$ ad ogni istante è una realizzazione di una **variabile aleatoria**, la cui media statistica $<I(t)> = 0$.
+
+Definiamo il correlatore tra la corrente a due tempi diversi come
+$$G_{II}(t,t') = <I(t)I(t')>$$
+Quale è il significato fisico di questo oggetto?
+- Se due variabili aleatorie $x,y$ sono indipendenti, allora $<xy> = 0$.
+- Se $t = t'$, allora recupero la definizione di **varianza** di $I(t)$.
+
+Ora consideriamo il caso speciale in cui uno dei due tempi è 0 e definiamo così l'autocorrelazione
+$$R_{I}(t) = <I(t)I(0)>$$
+
+Ed infine definiamo il **noise power spectrum** associato alla corrente $I(t)$ come la **trasformata di Fourier dell'autocorrelazione**, ovvero
+
+$$S_{II}(\omega) = \int_{-\infty}^{\infty}dt e^{-i\omega t}<I(t)I(0)>$$
+
+Questa grandezza descrive il rumore sulla corrente, che emerge quando la misuro. Per vederlo, presento **due interpretazioni** del noise power spectrum.
+
+### 1) Potenza del rumore
+Consideriamo il circuito di prima, la potenza _istantanea_ dissipata nella resistenza (e quindi quella **trasferita** dalla sorgente di rumore all'impedenza) è $P(t) = RI^2$.
+>>>>>>> 1fbd5cfbc18f5ea0821b7aaa8baa17c9b8bb3699:Noise and wak measure/noise_last.md
 Se invece calcoliamo la potenza _media_ su un intervallo di tempo $T$, allora questa è $\bar{P}=\frac1T\int_0^Tdt I^2(t)$ (media integrale).
 
 Nel limite in cui l'intervallo di tempo $T$ è molto lungo, è possibile sostituire la media temporale con una media statistica e se scelgo $R=1$ per avere un risultato indipendente da R (equivale a dividere per $R$), ottengo che
 $$\bar{P} = \int_{-\infty}^{\infty}S_{II}(\omega)d\omega$$
 
+<<<<<<< HEAD:Noise and slow measure/noise_last.md
 Questa relazione mi permette di **interpretare** $S(\omega)$ come la **densità di potenza media trasferita** dalla sorgente di rumore al sistema, "alla frequenza $\omega$"
 [_ovvero con segnali_ generati dalla sorgente di rumore di frequenza nell'intervallo [$\omega, \omega+d\omega$].
 
@@ -43,6 +81,13 @@ _Informalmente_, questa interpretazione viene presentata dicendo che "lo spettro
 ### 2) Varianza di $I(t)$
 Ora presentiamo una seconda interpretazione, più importante.
 
+=======
+Questa relazione mi permette di **interpretare** $S(\omega)d\omega$ come la Potenza media trasferita dalla sorgente di rumore al sistema, "alla frequenza $\omega$", _ovvero con segnali_ generati dalla sorgente di rumore di frequenza nell'intervallo [$\omega, \omega+d\omega$].
+
+_Informalmente_, questa interpretazione viene presentata dicendo che "lo spettro $S(\omega)$ ci dice quali frequenze costituiscono il rumore", ma sopra l'ho detto in modo esplicito.
+
+### 2) Varianza di $I(t)$
+>>>>>>> 1fbd5cfbc18f5ea0821b7aaa8baa17c9b8bb3699:Noise and wak measure/noise_last.md
 La varianza della r.v. $I(t)$ è per definizione $$\sigma_{I(t)}^2 = <I^2(t)>$$ (perché $<I(t)>=0$).
 Se assumiamo che il rumore sia stazionario, ovvero che la varianza di $I(t)$ non dipenda dal tempo
 
@@ -53,6 +98,7 @@ Usando che l'autocorrelazione è la _trasformata di Fourier inversa_ di $S(\omeg
 $$\sigma_I^2 = \frac{1}{2\pi}\int_{-\infty}^{\infty}d\omega S_{II}(\omega)$$
 per ogni tempo $t$.
 
+<<<<<<< HEAD:Noise and slow measure/noise_last.md
 [Quindi abbiamo trovato un'altra interpretazione del noise power spectrum. E' ragionevole che le due interpretazioni coesistano, perché la presenza di una varianza(**quindi di fluttuazioni nel tempo**) è causata dall'interazione con la sorgente di rumore **e quindi** dal fatto che ci sia un **trasferimento di energia** tra il sistema e l'ambiente. Più questa interazione è forte e più mi aspetto che la varianza sia grande. Bisogna però dire che, nonostante ci aspettiamo che per **tutte le osservabili** il noise power spectrum **descriva in qualche modo** la potenza che l'ambiente trasferisce al sistema ad una certa frequenza, non sempre questa potenza trasmessa coincide con il noise power spectrum. Per alcune osservabili questa proprietà è descritta esplicitamente, per altre no, ma comunque l'informazione ci aspettiamo sia presente, in qualche modo.]
 
 
@@ -63,10 +109,25 @@ Consideriamo ora alcune proprietà del noise power spectrum.
 - Un'altra considerazione pratica è che in generale oltre alla sorgente di rumore può esserci **un altro generatore di corrente**, la corrente totale è la **somma** dei due contributi e per calcolare il noise power spectrum considero **solo la componente rumorosa**.
 
 #### Corrente integrata nel tempo
+=======
+Quindi abbiamo trovato un'altra interpretazione del noise power spectrum. E' ragionevole che le due interpretazioni coesistano, perché la presenza di una varianza è causata dall'interazione con la sorgente di rumore **e quindi** dal fatto che ci sia un **trasferimento di energia** tra il sistema e l'ambiente. Più questa interazione è forte e più mi aspetto che la varianza sia grande. Bisogna però dire che, nonostante ci aspettiamo che per **tutte le osservabili** il noise power spectrum **descriva in qualche modo** la potenza che l'ambiente trasferisce al sistema ad una certa frequenza, non sembre questa potenza trasmessa coincide con il noise power spectrum. Per alcune osservabili questa proprietà è descritta esplicitamente, per altre no, ma comunque l'informazione ci aspettiamo sia presente, in qualche modo.
+
+
+Osserviamo poi che, in pratica, si lavora con circuiti in cui sono presenti dei filtri (e.g. Passabasso che filtrano le frequenze $\omega > \omega_{max}$).
+Siccome $S(\omega)d\omega$ rappresenta la potenza trasmessa al sistema alla frequenza $\omega$ e le frequenze superiori ad $\omega_{max}$ non si possono trasmettere, allora devo _modificare gli estremi di integrazione_ ($+\infty \rightarrow \omega_{max}$).
+
+Osserviamo che, fino a questo momento, abbiamo considerato $I(t)$ come la corrente generata dalla sorgente di rumore. In generale questa è sovrapposta al segnale che vogliamo misurare, infatti l'espressione generale di una osservabile è
+$$I(t) = <I(t)> + \text{Noise}$$
+Siccome il rumore ha media statistica nulla, allora il segnale che vogliamo misurare è la media statistica. Per calcolare $S(\omega)$ bisogna quindi sottrarre dall'osservabile la sua media statistica
+$$I(t) \rightarrow I(t)-<I(t)>$$
+
+
+>>>>>>> 1fbd5cfbc18f5ea0821b7aaa8baa17c9b8bb3699:Noise and wak measure/noise_last.md
 Consideriamo ora la corrente integrata nel tempo, questa grandezza ci tornerà utile più tardi quando parleremo di come si misura sperimentalmente lo stato di un qubit superconduttivo.
 $$m(T) = \int_0^T I(t)dt$$
 Considerando $I(t)$ come _la sola parte rumorosa_ della corrente (abbiamo detto che questa è la parte da considerare per calcolare la varianza), si ha che $<I(t)> = 0$ e quindi $<m(T)> = 0$. Di conseguenza è possibile calcolare la varianza di $m(T)$ come
 $$<m^2(T)> = \int_{-\infty}^{\infty}d\omega \frac{S_{II}(\omega)}{\omega^2}(1-cos(\omega T))\sim S_{II}(\omega = 0)*T$$
+<<<<<<< HEAD:Noise and slow measure/noise_last.md
 dove il limite è valido **per tempi T grandi**.
 
 Il tempo $T$ è il tempo trascorso da quando ho iniziato a raccogliere le misure della corrente per calcolare (uno stimatore di) m(T); quindi è la **durata della misura**.
@@ -79,6 +140,17 @@ Questa idea è sostenuta dal fatto che l'integranda diventa piccata in $\omega =
 [Grafico]
 
 #### TCL
+=======
+dove il limite è valido per tempi T grandi.
+
+Il tempo $T$ è il tempo trascorso da quando ho iniziato a raccogliere le misure della corrente per calcolare (uno stimatore di) m(T); quindi è la **durata della misura**. L'idea intuitiva secondo la quale **solo** il valore di $S(\omega)$ ad $\omega = 0$ è rilevante nel calcolo della varianza di $m(T)$ è questa:
+
+Se scompongo il rumore come una somma di segnali periodici con frequenze differenti, $S(\omega)$ mi da informazioni sull'intensità della componente del rumore di frequenza $\omega$ (questo è vero per le considerazioni fatte sulla interpretazione di $S(\omega)$ come "potenza del rumore"). Integrando le componenti di frequenza alta (quindi periodo piccolo) nel tempo, quando il tempo di misura $T$ supera il periodo del segnale, **tale somma fa zero**.
+Questa idea è sostenuta dal fatto che l'integranda diventa piccata in $\omega = 0$ al crescere della durata della misura.
+
+[Grafico]
+
+>>>>>>> 1fbd5cfbc18f5ea0821b7aaa8baa17c9b8bb3699:Noise and wak measure/noise_last.md
 Prima di generalizzare questi concetti in meccanica quantistica, voglio evidenziare che l'ultimo risultato ottenuto (_espressione della_ varianza della corrente integrata) è coerente con il TCL.
 
 Dalla corrente integrata è possibile calcolare la media temporale della corrente come _media integrale_ $\bar{I}(T) = \frac{<m(T)>}{T}$ e la varianza sulla media va come $\sim \frac{T}{T^2}=\frac{1}{T}$ (quadrato perché quando calcolo $<m^2>$ ho un quadrato).
@@ -113,21 +185,35 @@ Abbiamo generalizzato il concetto di Noise power spectrum in MQ, tuttavia
 
 #### Oscillatore armonico
 
+<<<<<<< HEAD:Noise and slow measure/noise_last.md
 **Per cercare questo analogo**,consideriamo un sistema semplice, ovvero un oscillatore armonico e presentiamo il noise power spectrum _della posizione_, considerando che il sistema **interagisca con un bagno termico** e sia **all'equilibrio** termodinamico.
+=======
+Per cercare questo analogo,consideriamo un sistema semplice, ovvero un oscillatore armonico e presentiamo il noise power spectrum _della posizione_, considerando che il sistema **interagisca con un bagno termico** e sia **all'equilibrio** termodinamico.
+>>>>>>> 1fbd5cfbc18f5ea0821b7aaa8baa17c9b8bb3699:Noise and wak measure/noise_last.md
 Presentiamo il rumore sia classicamente che in MQ.
 
 Classicamente, all'equilibrio termodinamico, $S_{xx}(\omega) = \frac{k_bT}{M\Omega^2}[\delta(\omega-\Omega)+\delta(\omega+\Omega)]$ dove $\Omega$ ed M sono la frequenza e la massa dell'oscillatore.
 Il rumore si annulla se la temperature T=0K e le due delta rappresentano che lo scambio di energia avviene solo alla frequenza dell'oscillatore.
 
+<<<<<<< HEAD:Noise and slow measure/noise_last.md
 Invece, in meccanica quantistica (sempre all'equilibrio termodinamico), **si ottiene una espressione diversa**, per due motivi:
+=======
+Invece, in meccanica quantistica (sempre all'equilibrio termodinamico), si ottiene una espressione diversa, per due motivi:
+>>>>>>> 1fbd5cfbc18f5ea0821b7aaa8baa17c9b8bb3699:Noise and wak measure/noise_last.md
 - Mentre _classicamente_ posizione e momento sono variabili aleatorie indipendenti, dunque scorrelate: $<x(t)p(t)>=0$; in MQ $<\hat{x}\hat{p}>=i\hbar/2$ perché $\hat{a},\hat{a^+}$ (o equivalentemente $x,p$) non commutano.
 - Classicamente $<x^2> \sim k_bT$ per il principio di equipartizione, mentre in meccanica quantistica non è nullo a $T=0$, perchè a temperatura nulla lo stato è _certamente nel GS_, ma il valore di aspettazione di $x^2$ sul GS è la ZPF che non dipende da T e non è nullo!
 
 #### Oscillatore quantistico
 
+<<<<<<< HEAD:Noise and slow measure/noise_last.md
 Osserviamo che: 
 - Non è nullo a T=0K! (perché nBE = 0, ecc.). Questo rumore, che ho anche allo zero assoluto, non esiste classicamente perché **non è dato dall'interazione** con una sorgente di rumore (che in questo esempio è un bagno termico), ma dal fatto che il ground state non è un autostato della posizione. Quindi, se faccio tante misure della posizione sul ground state, la loro distribuzione sarà _caratterizzata da una varianza_ pari ad $x_{ZPF}$.
 - Inoltre non è simmetrico ed ora cerchiamo di **interpretare** questa asimmetria.
+=======
+Principali differenze: 
+- Non è nullo a T=0K! (perché nBE = 0, ecc.). Questo rumore, che ho anche allo zero assoluto, non esiste classicamente perché non è dato dall'interazione con una sorgente di rumore (che in questo esempio è un bagno termico), ma dal fatto che il ground state non è un autostato della posizione. Quindi, se faccio tante misure della posizione sul ground state, la loro distribuzione sarà _caratterizzata da una varianza_ pari ad $x_{ZPF}$.
+- Non è simmetrico ed ora cerchiamo di **interpretare** questa asimmetria.
+>>>>>>> 1fbd5cfbc18f5ea0821b7aaa8baa17c9b8bb3699:Noise and wak measure/noise_last.md
 
 Osserviamo la presenza dei termini BE e BE+1. Questi termini compaiono nei rate di assorbimento o emissione di un fotone quando si descrive un **gas di fotoni** che interagisce con un sistema atomico. Qui invece abbiamo un oscillatore armonico (le cui eccitazioni sono bosoni e quindi è descrivibile come un gas di bosoni) che interagisce con una sorgente di rumore (ovvero l'ambiente).
 
@@ -164,10 +250,16 @@ Questo ci consente di **distinguere chiaramente** quale sia lo stato del qubit s
 $$\eta = \frac{|<m(t)>_+-<m(t)>_-|^2}{\sigma_m^2(t)}\sim t$$
 quindi la risoluzione **cresce nel tempo** (**QUESTO** è il vantaggio di misure lente) e possiamo definire **la durata della misura** come il tempo da aspettare per riuscire a distinguere chiaramente tra i due stati (e.g. $\eta = 1$).
 
+<<<<<<< HEAD:Noise and slow measure/noise_last.md
 #### VANTAGGI / SVANTAGGI di una misura lenta
 Questo è il vantaggio di fare una misura lenta, ora cerchiamo di capire se ci sono **anche** degli **svantaggi**.
 ## Backaction
 Ragionevolmente, fare una misura lenta (ovvero non istantanea, ma prolungata nel tempo) è equivalente a fare tante misure istantanee molto vicine nel tempo.
+=======
+Abbiamo presentato il vantaggio che si presenta se si fanno misure lente, ora cerchiamo di capire se ci sono anche degli svantaggi.
+## Backaction
+E' ragionevole che fare una misura lenta (ovvero non istantanea, ma prolungata nel tempo) sia equivalente a fare tante misure istantanee molto vicine nel tempo.
+>>>>>>> 1fbd5cfbc18f5ea0821b7aaa8baa17c9b8bb3699:Noise and wak measure/noise_last.md
 Tuttavia il principio di indeterminazione ci dice che se misuro un'osservabile $x$ con una precisione $\Delta x$, allora avrò una **variazione ignota** dell'osservabile coniugata $p$ che è $\Delta p \geq \hbar/(2\Delta x)$ (ignota perché non conosco il suo valore, ma solo questa disuguaglianza).
 
 Se faccio _una sola_ misura istantanea, questo effetto collaterale della misura (_backaction_) non mi da fastidio. Tuttavia, quando faccio una misura lenta, io faccio tante misure _successive_ e sarebbe un problema se la variazione ignota dell'osservabile coniugata si ripercuotesse **sui valori futuri** dell'osservabile misurata!
@@ -180,9 +272,13 @@ Le misure lente in cui l'evoluzione dell'osservabile coniugata non dipende da qu
 In queste misure, più tempo aspetto e migliore è la risoluzione della misura.
 Se, invece, la misura non è QND, allora non posso far durare la misura un tempo troppo lungo, altrimenti perdo l'informazione che voglio ottenere dalla misura.
 
+<<<<<<< HEAD:Noise and slow measure/noise_last.md
 La misura dello stato di un qubit superconduttivo è QND, perché **se descrivo** la backaction non attraverso il principio di indeterminazione, ma considerando esplicitamente l'hamiltoniana di interazione con lo strumento di misura (cavità), trovo che precessiome...
 Posso vedere che la misura è QND anche nella picture di Heisemberg...
 Da questa ultima espressione trovo....
+=======
+La misura dello stato di un qubit superconduttivo è QND, perché le osservabili coniugate a $\sigma z$ sono $\sigma x, \sigma y$, e la probabilità di misurare $\sigma z = 0,1$ **non dipende** dai valori di $\sigma x, \sigma y$.
+>>>>>>> 1fbd5cfbc18f5ea0821b7aaa8baa17c9b8bb3699:Noise and wak measure/noise_last.md
 
 #### Dephasing
 
