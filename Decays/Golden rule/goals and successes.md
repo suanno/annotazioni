@@ -44,3 +44,8 @@ Anyway, this equivalence **gives the opportunity of inserting arbitrary time dep
 
 ### Uncountable final states
 If the final states are uncountable (as in the case where the _unperturbed_0 system ($H_0$) is a _free particle_ [not confined, **not even** in a very big box]) then there are problems in defining a density of states, because the number of states in the Energy range $(E, E+dE)$ is infinite and so $\rho(E)dE = \infty$.
+
+### Dimension of states in a system with "continuos states" (e.g. really free particle [NO BOX])
+$\braket{k|k'} = \delta(k-k')$ so the state $\ket{k}$ has a dimension, because the delta has a dimension due to the fact that $\int_R\delta(k)dk = 1$ and $dk$ has the dimension of a momentum.
+
+As a consequence, even the term we calculate to get the rule: $\braket{m|U(t)|n}$ has a dimension because the states have the dimension of $[E^{-\frac12}]$ while the evolution operator its a complex exponential, so it's dimensionless.
