@@ -49,3 +49,5 @@ If the final states are uncountable (as in the case where the _unperturbed_0 sys
 $\braket{k|k'} = \delta(k-k')$ so the state $\ket{k}$ has a dimension, because the delta has a dimension due to the fact that $\int_R\delta(k)dk = 1$ and $dk$ has the dimension of a momentum.
 
 As a consequence, even the term we calculate to get the rule: $\braket{m|U(t)|n}$ has a dimension because the states have the dimension of $[E^{-\frac12}]$ while the evolution operator its a complex exponential, so it's dimensionless.
+
+So the result of the golden rule, it is not a probability because it is not dimensionless, but it has dimension $[E^{-1}]$ that is the dimension of a density (_of what?_) per unit energy.
