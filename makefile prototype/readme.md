@@ -1,5 +1,6 @@
 # C Makefile prototype
 Copy this folder to start a new project
+    
     cp -r makefile\ prototype/ newproject
 
 In /main/Makefile you have to tell what programs (main) to compile and what custom libraries, contained in /modules (and /include for the header/function declaration) to link.
