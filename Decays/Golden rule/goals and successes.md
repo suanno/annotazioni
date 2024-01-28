@@ -1,3 +1,8 @@
+## Look at Cohen Tanoudji Vol 2 P. 391-440
+Here there are some aspects interesting
+- Separated threatment for continuos or discrete final states. Continuos final states are realistic: e.g. 2 body decays have continuos energy levels!
+- Secular approximation: Calculate scattering probability with an approximation different from first order approximation. Enables to calculate the probability for hight times t!!!
+
 ## Successes
 - If $t$ is low, then both the calculations (Shrodinger and Interaction) presented in "golden rule stuck.md" are equal.
 That's because you have to expand the exponential inside the integral just to order zero, because t is low and you need to keep only the leading (smallest) order in the final expression.
