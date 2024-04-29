@@ -14,15 +14,15 @@ Imagine to have a **qubit** and that you want to measure its operator $\hat{S_x}
 When you perform a measurement, you have a **macroscopic indicator** whose position/orientation _is supposed to_ describe what is the state of the system.
 So the most reasonable way of describing this **quantomechanically** is this:
 
-$$\hat{U}_{SA}(\ket{+}\otimes\ket{A_0}) = \ket{+}\otimes\ket{A_+}$$
-$$\hat{U}_{SA}(\ket{-}\otimes\ket{A_0}) = \ket{-}\otimes\ket{A_-}$$
+$$`\hat{U}_{SA}(\ket{+}\otimes\ket{A_0}) = \ket{+}\otimes\ket{A_+}`$$
+$$`\hat{U}_{SA}(\ket{-}\otimes\ket{A_0}) = \ket{-}\otimes\ket{A_-}`$$
 
 where $\ket{+},\ket{-}$ are the eigenstates of the Observable **of the system that the apparatus measures**, while $\ket{A_+},\ket{A_-}$ are two states of the apparatus, corresponding to two different orientation of the macroscopic indicator. 
 In this way the interaction establishes a correlation (**entanglement**) between the system's and appartus' states; so if you make a **projective** measure on the apparatus **by reading the position of the macroscopic indicator**, you can conclude what is the state of the system.
 That is the property we asked for. 
 
 Using the superposition principle, you get
-$$\hat{U}_{SA}(\alpha\ket{+}+\beta\ket{-})\otimes\ket{A_0} = \alpha\ket{+}\ket{A_+} + \beta\ket{-}\ket{A_-}$$
+$$`\hat{U}_{SA}(\alpha\ket{+}+\beta\ket{-})\otimes\ket{A_0} = \alpha\ket{+}\ket{A_+} + \beta\ket{-}\ket{A_-}`$$
 so the interaction with the apparatus produces this entanglement without changing the coefficients $\alpha$ and $\beta$.
 
 Notice that the states $\ket{+},\ket{-}$ are orthogonal, as they are eigenstates corresponding to different eigenvalues. But also $\ket{A_+},\ket{A_-}$ are orthogonal because, in order for the apparatus to properly work, the two different orientation of the indicator must be **clearly different**.
@@ -34,14 +34,14 @@ This evolution is not abrupt, but it takes a **very short time** for the two app
 The above relation is very reasonable, but it has a **big problem**.
 
 In fact, you can express the apparatus states as linear combinations of states of another basis of the apparatus
-$$\ket{A_\pm} = c_{\pm+}\ket{\tilde{A}_+} + c_{\pm-}\ket{\tilde{A}_-}$$
+$$`\ket{A_\pm} = c_{\pm+}\ket{\tilde{A}_+} + c_{\pm-}\ket{\tilde{A}_-}`$$
 
 Now, if you **consider the case where**
-$$\alpha C_{++} = \beta C_{-+} = 2^{-\frac12}$$
-$$\alpha C_{+-} = -\beta C_{-+} = -2^{-\frac12}$$
+$$`\alpha C_{++} = \beta C_{-+} = 2^{-\frac12}`$$
+$$`\alpha C_{+-} = -\beta C_{-+} = -2^{-\frac12}`$$
 
 You end up with
-$$\ket{\Psi} = \ket{0}\ket{\tilde{A}_+} + \ket{1}\ket{\tilde{A}_-}$$
+$$`\ket{\Psi} = \ket{0}\ket{\tilde{A}_+} + \ket{1}\ket{\tilde{A}_-}`$$
 
 So there is **even** an entanglement between the eigenstates of $\hat{S}_z$ and the apparatus states.
 As we do not know what are the apparatus' states associated with the different orientations of the indicator (that's because we're making a **quantomehanical** description of a **macroscopic object**, so it is not clear how two connect the two things)
@@ -59,26 +59,26 @@ In order for the apparatus to work, we need that the entanglement between the sy
 This means that, **during the interaction with the apparatus**, the composite system has this evolution
 
 [For the moment we IGNORE the enviroment presence]
-$$\hat{U} (\ket{S_i}\ket{A_0})= e^{i\varphi_i(t)}\ket{S_i}\hat{U_A}\ket{A_0} = e^{i\varphi_i(t)}\ket{S_i}\ket{A_i(t)}$$
+$$`\hat{U} (\ket{S_i}\ket{A_0})= e^{i\varphi_i(t)}\ket{S_i}\hat{U_A}\ket{A_0} = e^{i\varphi_i(t)}\ket{S_i}\ket{A_i(t)}`$$
 Where $\braket{A_i|A_j}\rightarrow 0$ as time passes and $\hat{U} = e^{-iH_{SA}t}$ as we assume that the interaction with the apparatus is 
 - very localized in time
 - and very strong, because it has to establish a strong entanglement in this small time; so we can neglect all other interactions.
 
 This is the **only** way the **composite** system (system + apparatus) can evolve in order that, if the initial state of the (isolated) system is defined by some coefficients $\{\alpha_i\}$
 
-$$\ket{\Psi} = \alpha_i\ket{S_i}$$
+$$`\ket{\Psi} = \alpha_i\ket{S_i}`$$
 
 then those coefficients are kept in time in the diagonal of the reduced density matrix
 
-$$\ket{\Psi}\ket{A_0}\rightarrow \sum_i \alpha_i e^{i\varphi(t)}\ket{S_i}\ket{A_i}$$
+$$`\ket{\Psi}\ket{A_0}\rightarrow \sum_i \alpha_i e^{i\varphi(t)}\ket{S_i}\ket{A_i}`$$
 where $\{\ket{A_i}\}$ are orthogonal (or precisely they became exponentially fast orthogonal), so when you take the partial trace you have **still** the coefficients $\{\alpha_i\}$.
 This is important, because we do not want the probabilites of measuring each possible result **to be affected by the apparatus interaction**.
 
 So we see that the evolution operator $\hat{U}$ has the shape, in a matrix form
-$$\hat{U} = (\lambda_i 1\quad0\\\qquad\quad0\quad \hat{U_E})$$
+$$`\hat{U} = (\lambda_i 1\quad0\\\qquad\quad0\quad \hat{U_E})`$$
 
 So $\hat{U}$ commutes with every operator $\ket{S_i}\bra{S_i}$ and, as $U = e^{iH_{AS}t}$, then we have
-$$[H_{AS}, \ket{S_i}\bra{S_I}] = 0\quad\forall i$$
+$$`[H_{AS}, \ket{S_i}\bra{S_I}] = 0\quad\forall i`$$
 
 That means that it commutes with every linear combination $O_S = \sum_i O_i\ket{S_i}\bra{S_i}$, that is a _generic_ operator that is diagonal in the basis $\{\ket{S_i}\}$.
 
@@ -95,7 +95,7 @@ In particular we ask that the probability of measuring each state of the apparat
 That means that the **projector of the apparatus basis** commutes with $H_{AE}$
 [We assume that the measured system does not interact with the enviroment, so only the apparatus does. This is a _realistic assumption_, for example a superconducting qubit is usually coupled to a a resonator, that is coupled to an RF line. So there is **NO direct coupling** of the qubit with the RF line, the enviroment]
 
-$$[H_{AE}, P_A] = 0$$
+$$`[H_{AE}, P_A] = 0`$$
 
     So we found the TWO commutative relations that must be satisfied in an experimental setup in order for it to measure the desired observable of the system.
 
@@ -108,7 +108,7 @@ But this is a **naive** idea and, in addition, the previous reasoning is not rig
 
 The rigorous reason why there is no ambiguity, is that until we consider only two systems (system and apparatus), then we can use the **Shmitz Decomposition theorem** to state that **every state**
 
-$$\sum_{ij} \alpha_{ij}\ket{S_i}\ket{S_j} = \sum_k \tilde{\alpha}_k \ket{S_k}\ket{\tilde{A}_k}$$
+$$`\sum_{ij} \alpha_{ij}\ket{S_i}\ket{S_j} = \sum_k \tilde{\alpha}_k \ket{S_k}\ket{\tilde{A}_k}`$$
 **always** as an entangled state and the decomposition **is not necessarly unique**.
 
 But, **when we consider a 3rd system (the rest of the world)** then the theorem does not hold anymore.

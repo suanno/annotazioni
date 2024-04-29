@@ -4,7 +4,7 @@ We can do so, by describing the interaction with the Apparatus _at the level of_
 
 ## Example: Double Stern-Gerlach setup
 Let's consider to **prepare** particles in an even superposition
-$$\ket{\Psi_0} = \frac{\ket{+}+\ket{-}}{2}$$
+$$`\ket{\Psi_0} = \frac{\ket{+}+\ket{-}}{2}`$$
 The particles pass through a stern-gerlach apparatus, after which we have other two stern-gerlach apparatus operating _in reverse_.
 
 
@@ -19,7 +19,7 @@ But if you measure the path of the particles **after the reverse** stern-gerlach
 
 From the point of view of the **reduced density matrix**, you can see it is different in the two cases
 
-$$\rho_1 = (\frac12\quad \frac12\\\qquad \frac12 \quad \frac12)$$
+$$`\rho_1 = (\frac12\quad \frac12\\\qquad \frac12 \quad \frac12)`$$
 
 $$\rho_2 = (\frac12\quad 0\\\qquad 0 \quad \frac12)$$
 
@@ -33,17 +33,17 @@ Now I'll show that this effect, **at the level of denisty matrix**, can be imple
 
 The idea is that we saw how the interaction with the apparatus entangles the system's states of the **pointer basis** to some orthogonal apparatus states.
 
-$$\ket{\Psi} = \frac{1}{\sqrt{2}}(\ket{+}\ket{A_+} + \ket{-}\ket{A_-})$$
+$$`\ket{\Psi} = \frac{1}{\sqrt{2}}(\ket{+}\ket{A_+} + \ket{-}\ket{A_-})`$$
 
 [We are not writing _the rest of the world_ hilbert space. But we told that the pointer basis is the _only one_ when you have entanglement between all three systems!]
 
 So if you consider the reduced density matrix of the system, by tracing out the apparatus, you find that **it becomes fast diagonal in the pointer basis** (as we told that the apparatus states become rapidly orthogonal [measure implies dephasing])
-$$\rho = (\frac12\quad 0\\\quad 0 \quad\frac12)$$
+$$`\rho = (\frac12\quad 0\\\quad 0 \quad\frac12)`$$
 
 So we simply need **to tune the interaction** hamiltonianS (both syst-app and app-env) in a way that the pointer basis is $\ket{+}, \ket{-}$ and we have already seen how to do so **in general**:
 
-$$[S_{x}, H_{SA}] = 0$$
-$$[S_{x}, H_{EA}] = 0$$
+$$`[S_{x}, H_{SA}] = 0`$$
+$$`[S_{x}, H_{EA}] = 0`$$
 [The second is not correct, because the operators acts on orthogonal spaces and so it makes no sense. But the idea is that the projector on the pointer basis (intending the apparatus one) commutes with the interaction. But the apparatus pointer basis is correlated with the measured basis, so this is the reason **why tipically it is written so**]
 
 So we have seen that, **at the level of the reduced density matrix**, the effect of a projective measure can be reproduced by a proper interaction hamiltonian; so **avoiding** the **unconfortable** concept of projective measure.
