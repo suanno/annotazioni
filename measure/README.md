@@ -1,36 +1,38 @@
 # Introduction: Problems of the standard interpretation of quantum mechanics
+Before getting into the topic of my presentation, let's make **a few CONSIDERATIONS** about **measure in quantum mechanics** 
+
 - There is a problem of **incompatibility** among postulates.
 The isolated systems have unitary (so continuos) evolution,
 But when we make a measurement, the state of the system **collapses istantaneously** on an eigenstate and this process is **not continuos**.
 - Then, as the measure is a concept **defined in the postulates** (the measure is defined as a projection of the state on a subspace), it is not clear
-    - how a projective measure works and **when** it happens **during an experiment**
-    - what means from an **experimental** point of view **measure an Operator $\hat{O}$**. 
+    - **How** a projective measure works and **when** it happens **during an experiment**
+    - What means from an **experimental** point of view **measure an Operator $\hat{O}$**. 
 
-Today we'll not solve those fundamental problem of quantum mechanics, but we'll present a description of quantum measurement that **at least**
+Today we'll not solve this fundamental problem of quantum mechanics, but we'll present a description of quantum measurement that **at least**
 - Explains how to **experimentally measure an Operator** (from a purely theoretical view)
 - And manages to explain **operatively** the results of an experiment **avoiding** the concept of **projective** measure
 
-So we **will NOT question** about
-- how quantum measure works
-- what happens to the state of the universe when you perform a quantum measure
+So we **will NOT question** about what happens to the state of the universe when you perform a quantum measure
 
-Those questions are accounted as "the problem of measure" and we can find anwers only considering **interpretations** of quantum mechanics.
+This question is accounted as "the problem of measure" and we can find anwers only considering **interpretations** of quantum mechanics.
 
 But this is a more phylosopical problem so I will not speak about it.
 
 # How should we build the apparatus to measure a Quantum Observable $\hat{O}$?
 
-In MQ the measure concept is intrinsic in the postulates, but when we have to experimentally measure an Observable, we have to **rethink** to what is a measure and talking about interaction hamiltonian between sys. and apparatus. ...
-We will make consideration about what means measuring an Observable experimentally, but them will be **purely theoretical considerations**.
+The way we answer to this question is to **think** a measure in quantum mechanics **as a** process where a measuring apparatus interacts with the measured system.
+We will **ask some reasonable properties** that the apparatus must satisfy in order to **correctly measure the desired observable** AND this will **lead to** some **constraints** on the **form** of the **interaction** between the system and the apparatus.
+We can then **read those constraints** as **the way we should design** the apparatus in order to measure an operator.
+
+**But in order to** find those constraints, we have to **show concretely** HOW we deal with the measure concept in the theory, and we'll do this with an example
 
 ## Example: Measuring the spin of a qubit
-Through an example, we find what is the shape of the interaction with the apparatus in order to measure $\hat{S_z}$.
 
 ### Premeasurement
 ### Ambiguity
 ### Enviroment selection
 
-In order for the apparatus **to do its job** the above conditions on the interaction hamiltonians $H_{AS}$ and $H_{AE}$ must be fullfilled. 
+So our answer to the first question is that: in order for the apparatus **to do its job** the above conditions on the interaction hamiltonians $H_{AS}$ and $H_{AE}$ must be fullfilled. 
 
 ## The measure problem
 Notice that we did not explained "how quantum measure works", but just "how to build the apparatus to perform a measure".

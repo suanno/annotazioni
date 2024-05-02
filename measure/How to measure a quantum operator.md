@@ -18,16 +18,15 @@ $$`\hat{U}_{SA}(\ket{+}\otimes\ket{A_0}) = \ket{+}\otimes\ket{A_+}`$$
 $$`\hat{U}_{SA}(\ket{-}\otimes\ket{A_0}) = \ket{-}\otimes\ket{A_-}`$$
 
 where $\ket{+},\ket{-}$ are the eigenstates of the Observable **of the system that the apparatus measures**, while $\ket{A_+},\ket{A_-}$ are two states of the apparatus, corresponding to two different orientation of the macroscopic indicator. 
-In this way the interaction establishes a correlation (**entanglement**) between the system's and appartus' states; so if you make a **projective** measure on the apparatus **by reading the position of the macroscopic indicator**, you can conclude what is the state of the system.
-That is the property we asked for. 
 
 Using the superposition principle, you get
 $$`\hat{U}_{SA}(\alpha\ket{+}+\beta\ket{-})\otimes\ket{A_0} = \alpha\ket{+}\ket{A_+} + \beta\ket{-}\ket{A_-}`$$
-so the interaction with the apparatus produces this entanglement without changing the coefficients $\alpha$ and $\beta$.
 
-Notice that the states $\ket{+},\ket{-}$ are orthogonal, as they are eigenstates corresponding to different eigenvalues. But also $\ket{A_+},\ket{A_-}$ are orthogonal because, in order for the apparatus to properly work, the two different orientation of the indicator must be **clearly different**.
+In this way the interaction establishes a correlation (**entanglement**) between the basis of eigenstates of the operator we are measuring and an appartus' basis; so if you make a **projective** measure on the apparatus [**by reading the position of the macroscopic indicator**], you can conclude what is the state of the system.
+
+The states $\ket{+},\ket{-}$ are orthogonal, as they are eigenstates corresponding to different eigenvalues. But also $\ket{A_+},\ket{A_-}$ are orthogonal because, in order for the apparatus to properly work, the two different orientation of the indicator must be **clearly different**.
 _Naively_, this translates in a small overlap between the states $\ket{A_+},\ket{A_-}$, so we say that $\braket{A_+|A_-}\simeq 0$.
-This evolution is not abrupt, but it takes a **very short time** for the two apparatus states to become orthogonal as it's **exponentially fast** (exponetially, because at the level of reduced density matrix, this is a **dephasing effect**; we'll see it).
+**To be precise**, this evolution is not abrupt, but it takes a **very short time** for the two apparatus states to become orthogonal as it **decays exponentially fast** [exponetially, because at the level of reduced density matrix, this is a **dephasing effect**; we'll see it].
 [measure implies decoherence]
 
 ### Ambiguity
@@ -52,32 +51,33 @@ This brings to a problem not because the operator do not commute (we are not tel
 
 ### Enviroment selection
 
-But **this ambiguity is not real** as, in order for the apparatus to do its job (measuring the **desired** system's operator), there are some conditions that both $H_{SA}$ and $H_{AE}$ need to satisfy.
-Adding those conditions, **we expect** this apparent arbitrary choice disappears.
+But **this ambiguity is not real** as, in order for the apparatus to measure the **desired** operator, there are some properties that the apparatus has to satisfy. And those properties lead to constraints on the shape of the interaction, and **we expect** they remove the ambiguity.
 
-In order for the apparatus to work, we need that the entanglement between the system and the apparatus is **kept in time**.
-This means that, **during the interaction with the apparatus**, the composite system has this evolution
+In order for the apparatus to work properly, we **ask** that the entanglement between the system and the apparatus is **kept in time**. This means requiring that the entanglement **is solid** respect to the time when the _projective measure_ on the enviroment _happens_.
+Formally the requirement is that, **during the interaction with the apparatus**, the composite system has this evolution
 
 [For the moment we IGNORE the enviroment presence]
-$$`\hat{U} (\ket{S_i}\ket{A_0})= e^{i\varphi_i(t)}\ket{S_i}\hat{U_A}\ket{A_0} = e^{i\varphi_i(t)}\ket{S_i}\ket{A_i(t)}`$$
-Where $\braket{A_i|A_j}\rightarrow 0$ as time passes and $\hat{U} = e^{-iH_{SA}t}$ as we assume that the interaction with the apparatus is 
+$$`\hat{U} (\ket{S_i}\ket{A_0})=e^{i\varphi_i(t)}\ket{S_i}\ket{A_i(t)}`$$
+
+**Notice that** if this is the evolution of the composite system, then if we write the _most general state_
+
+$$`\ket{\Psi} = \sum_i\alpha_i\ket{S_i}\ket{A_0}`$$
+
+it evolves like
+
+$$`\ket{\Psi}\rightarrow \sum_i \alpha_i e^{i\varphi(t)}\ket{S_i}\ket{A_i}`$$
+where $\{\ket{A_i}\}$ are orthogonal (or precisely they became exponentially fast orthogonal).
+So if you take the partial trace **over the apparatus**, you can trace out **over this basis** and so the **reduced matrix** you are left with, as the $\{\ket{S_i}\}$ are orthogonal, is diagonal with entries $\alpha_i^2$, that do not change in time.
+
+So this shape of the evolution, **does not change in time** the **probabilities** of getting the different results by measuring the operator; and that is too a property we expect to hold.
+
+
+
+So $\hat{U}$ commutes with every operator $\ket{S_i}\bra{S_i}$ and $\hat{U} = e^{-iH_{SA}t}$ as we assume that the interaction with the apparatus is 
 - very localized in time
-- and very strong, because it has to establish a strong entanglement in this small time; so we can neglect all other interactions.
+- and very strong, because it has to establish a strong entanglement in this small time; so we can neglect all other interactions
 
-This is the **only** way the **composite** system (system + apparatus) can evolve in order that, if the initial state of the (isolated) system is defined by some coefficients $\{\alpha_i\}$
-
-$$`\ket{\Psi} = \alpha_i\ket{S_i}`$$
-
-then those coefficients are kept in time in the diagonal of the reduced density matrix
-
-$$`\ket{\Psi}\ket{A_0}\rightarrow \sum_i \alpha_i e^{i\varphi(t)}\ket{S_i}\ket{A_i}`$$
-where $\{\ket{A_i}\}$ are orthogonal (or precisely they became exponentially fast orthogonal), so when you take the partial trace you have **still** the coefficients $\{\alpha_i\}$.
-This is important, because we do not want the probabilites of measuring each possible result **to be affected by the apparatus interaction**.
-
-So we see that the evolution operator $\hat{U}$ has the shape, in a matrix form
-$$`\hat{U} = (\lambda_i 1\quad0\\\qquad\quad0\quad \hat{U_E})`$$
-
-So $\hat{U}$ commutes with every operator $\ket{S_i}\bra{S_i}$ and, as $U = e^{iH_{AS}t}$, then we have
+then we have
 $$`[H_{AS}, \ket{S_i}\bra{S_I}] = 0\quad\forall i`$$
 
 That means that it commutes with every linear combination $O_S = \sum_i O_i\ket{S_i}\bra{S_i}$, that is a _generic_ operator that is diagonal in the basis $\{\ket{S_i}\}$.
@@ -89,8 +89,7 @@ Anyway, there is an **additional constraint** that removes the ambiguity, that i
 
 [In reality the basis can be a **common set** of eigenstates of more **commuting** operators. So you can measure many operators _at the same time_. This does not rise problems as they commute.]
 
-We ask that **even this** (the one with the enviroment) interaction does not distrurb the entanglement between the system and the enviroment.
-In particular we ask that the probability of measuring each state of the apparatus, that is entangled with a state of the system's basis **we're measuring**, is not affected by the interaction with the enviroment.
+We ask that the probability of measuring each state of the apparatus, that is entangled with a state of the system's basis **we're measuring**, is not affected by the interaction with the enviroment.
 
 That means that the **projector of the apparatus basis** commutes with $H_{AE}$
 [We assume that the measured system does not interact with the enviroment, so only the apparatus does. This is a _realistic assumption_, for example a superconducting qubit is usually coupled to a a resonator, that is coupled to an RF line. So there is **NO direct coupling** of the qubit with the RF line, the enviroment]
